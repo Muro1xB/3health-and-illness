@@ -1,0 +1,3735 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Learning Platform - Health and Illness | Mohamed Salah</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+/* CSS Variables - Color System */
+:root {
+    --font-ar: 'Cairo', sans-serif;
+    --font-en: 'Roboto', sans-serif;
+    --primary: #6366F1;
+    --primary-dark: #4F46E5;
+    --primary-light: #818CF8;
+    --secondary: #10B981;
+    --secondary-dark: #059669;
+    --accent: #F59E0B;
+    --accent-dark: #D97706;
+    --danger: #EF4444;
+    --success: #10B981;
+    --bg: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --bg-tertiary: #F1F5F9;
+    --bg-card: #FFFFFF;
+    --text: #0F172A;
+    --text-secondary: #334155;
+    --text-light: #475569;
+    --border: #E2E8F0;
+    --border-light: #F1F5F9;
+    --border-dark: #CBD5E1;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 6px 10px -1px rgba(0, 0, 0, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
+    --transition-all: all 0.3s ease;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --bg: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #334155;
+    --bg-card: #1E293B;
+    --text: #F1F5F9;
+    --text-secondary: #E2E8F0;
+    --text-light: #CBD5E1;
+    --border: #334155;
+    --border-light: #475569;
+    --border-dark: #1E293B;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 6px 10px -1px rgba(0, 0, 0, 0.5), 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+}
+
+/* Base Styles */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+*::before, *::after { 
+    box-sizing: border-box; 
+}
+
+html { 
+    scroll-behavior: smooth; 
+    font-size: 16px; 
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale; 
+}
+
+body { 
+    font-family: var(--font-en); 
+    font-weight: 600; 
+    font-size: 1.125rem; 
+    line-height: 1.8; 
+    color: var(--text); 
+    background: var(--bg); 
+    transition: background-color var(--transition-base) ease, color var(--transition-base) ease; 
+    overflow-x: hidden; 
+    min-height: 100vh; 
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 { 
+    font-weight: 800; 
+    line-height: 1.4; 
+    margin-bottom: 1rem; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    hyphens: auto; 
+    color: var(--text); 
+}
+
+h1 { 
+    font-size: 3rem; 
+    color: var(--primary); 
+    margin-bottom: 2rem; 
+    text-align: center; 
+}
+
+h2 { 
+    font-size: 2.5rem; 
+    color: var(--secondary); 
+    margin-bottom: 1.5rem; 
+}
+
+h3 { 
+    font-size: 2rem; 
+    color: var(--accent); 
+    margin-bottom: 1.25rem; 
+}
+
+h4 { 
+    font-size: 1.5rem; 
+    color: var(--text-secondary); 
+    margin-bottom: 1rem; 
+}
+
+h5 { 
+    font-size: 1.25rem; 
+    margin-bottom: 0.75rem; 
+}
+
+h6 { 
+    font-size: 1.125rem; 
+    margin-bottom: 0.75rem; 
+}
+
+p { 
+    margin-bottom: 1rem; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    line-height: 1.8; 
+}
+
+strong { 
+    font-weight: 900; 
+    color: var(--text); 
+}
+
+em { 
+    font-style: italic; 
+    color: var(--text-secondary); 
+}
+
+a { 
+    color: var(--primary); 
+    text-decoration: none; 
+    transition: var(--transition-all); 
+}
+
+a:hover { 
+    color: var(--primary-dark); 
+    text-decoration: underline; 
+}
+
+a:focus { 
+    outline: 2px solid var(--primary); 
+    outline-offset: 2px; 
+}
+
+ul, ol { 
+    margin: 1rem 0; 
+    padding-left: 1.5rem; 
+    line-height: 1.8; 
+}
+
+li { 
+    margin-bottom: 0.5rem; 
+    word-wrap: break-word; 
+}
+
+button { 
+    font-family: var(--font-en); 
+    cursor: pointer; 
+    border: none; 
+    outline: none; 
+    transition: var(--transition-all); 
+    font-weight: 700; 
+}
+
+button:hover { 
+    transform: translateY(-2px); 
+}
+
+button:active { 
+    transform: translateY(0); 
+}
+
+button:disabled { 
+    opacity: 0.5; 
+    cursor: not-allowed; 
+}
+
+/* Text Wrapping for All Content Elements */
+.page, .numbered-item, .dual-text-row, .english-side, .arabic-side, 
+.flashcard-back, .explanation, .medical-example, .practical-example, 
+.doctor-note, .professor-explanation, .sub-concept, .comparison-table-3col, 
+.keyword-item, .trick-breakdown, .analysis-step, .tip-box, .question-card, 
+.option-text, .number-card, .key-point, .glossary-item { 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    hyphens: auto; 
+    overflow: auto; 
+    white-space: normal; 
+}
+
+/* Highlight Styles */
+.highlight { 
+    padding: 0.2rem 0.6rem; 
+    border-radius: 1.2rem; 
+    font-weight: 800; 
+    transition: var(--transition-all); 
+    display: inline-block; 
+    line-height: 1.6; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    position: relative; 
+}
+
+.highlight-1 { 
+    background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); 
+    color: #92400E; 
+    border: 1px solid #F59E0B; 
+}
+
+.highlight-2 { 
+    background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); 
+    color: #1E40AF; 
+    border: 1px solid #3B82F6; 
+}
+
+.highlight-3 { 
+    background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); 
+    color: #065F46; 
+    border: 1px solid #10B981; 
+}
+
+.highlight-4 { 
+    background: linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%); 
+    color: #9F1239; 
+    border: 1px solid #EC4899; 
+}
+
+.highlight-5 { 
+    background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%); 
+    color: #5B21B6; 
+    border: 1px solid #8B5CF6; 
+}
+
+.highlight-blood { 
+    background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%); 
+    color: #991B1B; 
+    border: 1px solid #EF4444; 
+}
+
+.highlight-urine { 
+    background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); 
+    color: #92400E; 
+    border: 1px solid #F59E0B; 
+}
+
+.highlight-blue { 
+    background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); 
+    color: #1E40AF; 
+    border: 1px solid #3B82F6; 
+}
+
+.highlight-green { 
+    background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); 
+    color: #065F46; 
+    border: 1px solid #10B981; 
+}
+
+.highlight-pink { 
+    background: linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%); 
+    color: #9F1239; 
+    border: 1px solid #EC4899; 
+}
+
+.highlight-purple { 
+    background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%); 
+    color: #5B21B6; 
+    border: 1px solid #8B5CF6; 
+}
+
+.highlight:hover { 
+    transform: scale(1.05); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { 
+    width: 12px; 
+    height: 12px; 
+}
+
+::-webkit-scrollbar-track { 
+    background: var(--bg-secondary); 
+}
+
+::-webkit-scrollbar-thumb { 
+    background: var(--border-dark); 
+    border-radius: var(--radius-full); 
+}
+
+::-webkit-scrollbar-thumb:hover { 
+    background: var(--primary); 
+}
+
+body.dark-mode ::-webkit-scrollbar-track { 
+    background: var(--bg-tertiary); 
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb { 
+    background: var(--border); 
+}
+
+/* Header Styles */
+header { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    background: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(20px) saturate(180%); 
+    -webkit-backdrop-filter: blur(20px) saturate(180%); 
+    box-shadow: var(--shadow-lg); 
+    z-index: 1000; 
+    transition: transform var(--transition-base) ease; 
+    border-bottom: 2px solid var(--border); 
+}
+
+body.dark-mode header { 
+    background: rgba(30, 41, 59, 0.95); 
+}
+
+header.collapsed { 
+    transform: translateY(-100%); 
+}
+
+.header-container { 
+    max-width: 1600px; 
+    margin: 0 auto; 
+    padding: 0.75rem 1.5rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 1rem; 
+    flex-wrap: wrap; 
+}
+
+.logo-section { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.3rem; 
+}
+
+.site-title { 
+    font-size: 1.25rem; 
+    font-weight: 900; 
+    color: var(--text); 
+    font-family: var(--font-en); 
+    line-height: 1.3; 
+}
+
+.developer-name { 
+    font-family: var(--font-en); 
+    font-size: 1rem; 
+    font-weight: 900; 
+    background: linear-gradient(135deg, #FFD700, #FFA500, #FF6B6B); 
+    background-size: 200% auto; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text; 
+    animation: gradientShift 3s ease infinite; 
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5)); 
+}
+
+@keyframes gradientShift { 
+    0%, 100% { background-position: 0% 50%; } 
+    50% { background-position: 100% 50%; } 
+}
+
+/* Hamburger Menu */
+.menu-toggle { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-around; 
+    width: 2rem; 
+    height: 2rem; 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 0; 
+    z-index: 1002; 
+}
+
+.menu-toggle span { 
+    width: 2rem; 
+    height: 3px; 
+    background-color: var(--text); 
+    border-radius: 10px; 
+    transition: var(--transition-all); 
+    transform-origin: 1px; 
+}
+
+body.dark-mode .menu-toggle span { 
+    background-color: var(--text); 
+}
+
+.menu-toggle.open span:nth-child(1) { 
+    transform: rotate(45deg); 
+}
+
+.menu-toggle.open span:nth-child(2) { 
+    opacity: 0; 
+}
+
+.menu-toggle.open span:nth-child(3) { 
+    transform: rotate(-45deg); 
+}
+
+.nav-container { 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    right: 0; 
+    background: var(--bg); 
+    box-shadow: var(--shadow-lg); 
+    border-top: 1px solid var(--border); 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(-20px); 
+    transition: var(--transition-all); 
+}
+
+body.dark-mode .nav-container { 
+    background: var(--bg-secondary); 
+}
+
+.nav-container.open { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateY(0); 
+}
+
+.main-nav { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 1rem 0; 
+}
+
+.main-nav a { 
+    padding: 1rem 1.5rem; 
+    font-size: 1.125rem; 
+    font-weight: 800; 
+    color: var(--text-secondary); 
+    text-decoration: none; 
+    border-radius: var(--radius-xl); 
+    transition: var(--transition-all); 
+    width: 100%; 
+    text-align: center; 
+}
+
+.main-nav a:hover, .main-nav a.active { 
+    background: var(--primary); 
+    color: white; 
+    transform: translateY(-2px); 
+    box-shadow: var(--shadow); 
+}
+
+.header-controls { 
+    display: flex; 
+    align-items: center; 
+    gap: 1rem; 
+}
+
+.theme-toggle { 
+    padding: 0.75rem; 
+    font-size: 1.5rem; 
+    background: var(--bg-card); 
+    border-radius: var(--radius-xl); 
+    cursor: pointer; 
+    transition: var(--transition-all); 
+    box-shadow: var(--shadow); 
+}
+
+.theme-toggle:hover { 
+    transform: scale(1.1) rotate(20deg); 
+    box-shadow: var(--shadow-lg); 
+}
+
+/* Dual Text Row Layout */
+.dual-text-row { 
+    display: grid; 
+    grid-template-columns: 1fr auto 1fr; 
+    gap: 1.5rem; 
+    align-items: start; 
+    margin: 1.5rem 0; 
+    padding: 1.5rem; 
+    background: var(--bg-card); 
+    border-radius: var(--radius-2xl); 
+    box-shadow: var(--shadow); 
+    overflow: auto; 
+}
+
+.english-side { 
+    font-family: var(--font-en); 
+    font-size: 1.125rem; 
+    font-weight: 700; 
+    color: var(--text); 
+    text-align: left; 
+    direction: ltr; 
+    padding: 1rem; 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-xl); 
+    border-left: 4px solid var(--primary); 
+    grid-column: 1; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    line-height: 1.8; 
+}
+
+.arrow-separator { 
+    font-size: 2.5rem; 
+    color: var(--accent); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    grid-column: 2; 
+    align-self: center; 
+}
+
+.arrow-separator::before { 
+    content: '→'; 
+}
+
+.arabic-side { 
+    font-family: var(--font-ar); 
+    font-size: 1.125rem; 
+    font-weight: 700; 
+    color: var(--text); 
+    text-align: right; 
+    direction: rtl; 
+    padding: 1rem; 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-xl); 
+    border-right: 4px solid var(--secondary); 
+    grid-column: 3; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    line-height: 2; 
+}
+
+/* Page Layout */
+.page { 
+    display: none; 
+    padding: 120px 1rem 2rem; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+    min-height: 100vh; 
+}
+
+.page.active-page { 
+    display: block; 
+    animation: fadeInPage 0.5s ease; 
+}
+
+@keyframes fadeInPage { 
+    from { opacity: 0; transform: translateY(20px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+.page h1 { 
+    text-align: center; 
+    margin-bottom: 3rem; 
+    padding-bottom: 1rem; 
+    border-bottom: 4px solid var(--primary); 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text; 
+}
+
+/* Numbered Sections */
+.numbered-section { 
+    counter-reset: section-counter; 
+}
+
+.numbered-item { 
+    position: relative; 
+    margin: 3rem 0; 
+    padding: 2rem; 
+    background: var(--bg-card); 
+    border-radius: var(--radius-2xl); 
+    box-shadow: var(--shadow-xl); 
+    border-left: 5px solid var(--primary); 
+    counter-increment: section-counter; 
+    overflow: auto; 
+}
+
+.numbered-item > h2 { 
+    font-size: 2.5rem; 
+    margin-bottom: 1.5rem; 
+    color: var(--primary); 
+    padding-bottom: 1rem; 
+    border-bottom: 3px solid var(--border); 
+}
+
+/* Flashcard Styles */
+.flashcard-section { 
+    max-width: 900px; 
+    margin: 3rem auto; 
+    padding: 1.5rem; 
+}
+
+.flashcard { 
+    width: 100%; 
+    max-width: 800px; 
+    height: 400px; 
+    margin: 0 auto 1.5rem; 
+    perspective: 1000px; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: stretch; 
+}
+
+.flashcard-inner { 
+    position: relative; 
+    width: 100%; 
+    height: 100%; 
+    transition: transform 0.6s; 
+    transform-style: preserve-3d; 
+}
+
+.flashcard.flipped .flashcard-inner { 
+    transform: rotateY(180deg); 
+}
+
+.flashcard-front, .flashcard-back { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    backface-visibility: hidden; 
+    -webkit-backface-visibility: hidden; 
+    border-radius: var(--radius-2xl); 
+    box-shadow: var(--shadow-xl); 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 2rem; 
+    overflow: auto; 
+    white-space: normal; 
+}
+
+.flashcard-front { 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+}
+
+.flashcard-front h2 { 
+    font-size: clamp(2rem, 5vw, 3rem); 
+    font-weight: 900; 
+    text-align: center; 
+    color: white; 
+    word-break: break-word; 
+}
+
+.flashcard-back { 
+    background: var(--bg-card); 
+    border: 3px solid var(--primary); 
+    transform: rotateY(180deg); 
+    padding: 1.5rem; 
+}
+
+.flashcard-back h2 { 
+    font-size: 2.5rem; 
+    color: var(--text); 
+    margin-bottom: 1rem; 
+    text-align: center; 
+}
+
+.flashcard-back h3 { 
+    font-size: 1.875rem; 
+    color: var(--accent); 
+    margin-bottom: 1.5rem; 
+    text-align: center; 
+}
+
+.flashcard-back .dual-text-row { 
+    width: 100%; 
+    font-size: 1rem; 
+    margin-top: 1rem; 
+}
+
+.flashcard-counter { 
+    text-align: center; 
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    color: var(--text); 
+    margin-bottom: 1.5rem; 
+}
+
+.flashcard-controls-container { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 1rem; 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-2xl); 
+    box-shadow: var(--shadow-md); 
+}
+
+.flashcard-controls { 
+    display: flex; 
+    justify-content: center; 
+    gap: 1rem; 
+    flex-wrap: wrap; 
+}
+
+.btn-control { 
+    padding: 1rem 1.5rem; 
+    font-size: 1.125rem; 
+    font-weight: 800; 
+    border: none; 
+    border-radius: var(--radius-xl); 
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
+    color: white; 
+    cursor: pointer; 
+    transition: var(--transition-all); 
+    box-shadow: var(--shadow); 
+    white-space: nowrap; 
+}
+
+.btn-control:hover { 
+    transform: translateY(-3px) scale(1.05); 
+    box-shadow: var(--shadow-lg); 
+}
+
+.btn-control:active { 
+    transform: translateY(-1px) scale(1.02); 
+}
+
+/* Content Sections */
+.concept-slide { 
+    max-width: 1400px; 
+    margin: 1.5rem auto; 
+    padding: 1.5rem; 
+}
+
+.sub-concept { 
+    margin: 3rem 0; 
+    padding: 1.5rem; 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-2xl); 
+    border: 2px solid var(--border); 
+    overflow: auto; 
+}
+
+.sub-concept h3 { 
+    font-size: 1.875rem; 
+    color: var(--secondary); 
+    margin-bottom: 1.5rem; 
+    padding-left: 1rem; 
+    border-left: 4px solid var(--secondary); 
+}
+
+.sub-concept h4 { 
+    font-size: 1.5rem; 
+    color: var(--accent); 
+    margin: 1.5rem 0 1rem; 
+}
+
+.professor-explanation { 
+    margin: 1.5rem 0; 
+    padding: 1.5rem; 
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1)); 
+    border-radius: var(--radius-2xl); 
+    border: 2px solid var(--primary); 
+    border-left: 6px solid var(--primary); 
+    overflow: auto; 
+}
+
+.professor-explanation h4 { 
+    color: var(--primary); 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+
+.professor-explanation p { 
+    font-family: var(--font-en); 
+    font-size: 1.125rem; 
+    line-height: 2.2; 
+    color: var(--text); 
+    word-wrap: break-word; 
+    text-align: left; 
+    direction: ltr; 
+}
+
+.professor-explanation strong { 
+    color: var(--primary-dark); 
+    font-weight: 900; 
+}
+
+.practical-example { 
+    margin: 1.5rem 0; 
+    padding: 1.5rem; 
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); 
+    border-radius: var(--radius-2xl); 
+    border: 2px dashed var(--secondary); 
+    border-left: 6px solid var(--secondary); 
+    overflow: auto; 
+}
+
+.practical-example h4 { 
+    color: var(--secondary); 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+
+.practical-example p { 
+    font-family: var(--font-en); 
+    font-size: 1rem; 
+    line-height: 2.2; 
+    color: var(--text); 
+    word-wrap: break-word; 
+    text-align: left; 
+    direction: ltr; 
+}
+
+.practical-example strong { 
+    color: var(--secondary-dark); 
+    font-weight: 900; 
+}
+
+.doctor-note { 
+    margin: 1.5rem 0; 
+    padding: 1.5rem; 
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.15)); 
+    border-radius: var(--radius-2xl); 
+    border: 3px solid var(--accent); 
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2); 
+    overflow: auto; 
+}
+
+.doctor-note h4 { 
+    color: var(--accent); 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+
+.doctor-note p { 
+    font-family: var(--font-en); 
+    font-size: 1.125rem; 
+    line-height: 2.2; 
+    color: var(--text); 
+    font-weight: 700; 
+    word-wrap: break-word; 
+    text-align: left; 
+    direction: ltr; 
+}
+
+.doctor-note strong { 
+    color: var(--accent-dark); 
+    font-weight: 900; 
+}
+
+.exam-question { 
+    margin: 1.5rem 0; 
+    padding: 1.5rem; 
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1)); 
+    border-radius: var(--radius-2xl); 
+    border: 2px solid var(--danger); 
+    border-left: 6px solid var(--danger); 
+    overflow: auto; 
+}
+
+.exam-question h4 { 
+    color: var(--danger); 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+
+.exam-question p { 
+    font-family: var(--font-en); 
+    font-size: 1rem; 
+    line-height: 2.2; 
+    color: var(--text); 
+    word-wrap: break-word; 
+    text-align: left; 
+    direction: ltr; 
+}
+
+/* Comparison Table */
+.comparison-container { 
+    max-width: 1400px; 
+    margin: 1.5rem auto; 
+    padding: 1.5rem; 
+}
+
+.comparison-table-3col { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 0; 
+    margin: 1.5rem 0; 
+    border-radius: var(--radius-2xl); 
+    overflow: auto; 
+    box-shadow: var(--shadow-xl); 
+}
+
+.comparison-header { 
+    display: grid; 
+    grid-template-columns: 1.2fr 1.5fr 1.5fr; 
+    gap: 2px; 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+}
+
+.comparison-header > div { 
+    padding: 1.5rem; 
+    text-align: center; 
+    font-weight: 900; 
+    font-size: 1.25rem; 
+    color: white; 
+    word-wrap: break-word; 
+}
+
+.comparison-row { 
+    display: grid; 
+    grid-template-columns: 1.2fr 1.5fr 1.5fr; 
+    gap: 2px; 
+    background: var(--border); 
+}
+
+.comparison-row > div { 
+    padding: 1.5rem; 
+    background: var(--bg-card); 
+    font-size: 1.125rem; 
+    line-height: 1.8; 
+    word-wrap: break-word; 
+}
+
+.col-aspect { 
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(245, 158, 11, 0.1)); 
+    font-weight: 800; 
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.col-item1 { 
+    background-color: rgba(99, 102, 241, 0.02); 
+    border-right: 4px solid var(--primary); 
+    text-align: left; 
+    direction: ltr; 
+}
+
+.col-item2 { 
+    background-color: rgba(16, 185, 129, 0.02); 
+    border-left: 4px solid var(--secondary); 
+    text-align: left; 
+    direction: ltr; 
+}
+
+/* Important Numbers */
+.numbers-container { 
+    max-width: 1200px; 
+    margin: 1.5rem auto; 
+    padding: 1.5rem; 
+}
+
+.number-slide { 
+    margin: 3rem 0; 
+    padding: 2rem; 
+    background: var(--bg-card); 
+    border-radius: var(--radius-2xl); 
+    box-shadow: var(--shadow-xl); 
+    overflow: auto; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.number-highlight { 
+    font-size: 8rem; 
+    font-weight: 900; 
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B6B 100%); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text; 
+    margin-bottom: 1.5rem; 
+    animation: numberPulse 2s ease-in-out infinite; 
+}
+
+@keyframes numberPulse { 
+    0%, 100% { transform: scale(1); } 
+    50% { transform: scale(1.1); } 
+}
+
+.number-title { 
+    font-size: 1.875rem; 
+    color: var(--primary); 
+    margin-bottom: 1.5rem; 
+    text-align: center; 
+}
+
+.number-description { 
+    font-size: 1.25rem; 
+    color: var(--text); 
+    margin-bottom: 1.5rem; 
+    text-align: center; 
+    max-width: 800px; 
+}
+
+.number-explanation { 
+    width: 100%; 
+    margin-top: 1.5rem; 
+}
+
+/* Final Review */
+.review-section { 
+    max-width: 1200px; 
+    margin: 1.5rem auto; 
+    padding: 1.5rem; 
+}
+
+.review-slide { 
+    margin: 3rem 0; 
+    padding: 2rem; 
+    background: var(--bg-card); 
+    border-radius: var(--radius-2xl); 
+    box-shadow: var(--shadow-xl); 
+    overflow: auto; 
+}
+
+.review-title { 
+    font-size: 1.875rem; 
+    color: var(--primary); 
+    margin-bottom: 1.5rem; 
+    text-align: center; 
+}
+
+.review-content { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5rem; 
+}
+
+.review-english { 
+    font-family: var(--font-en); 
+    font-size: 1.25rem; 
+    line-height: 1.8; 
+    color: var(--text); 
+    padding: 1.5rem; 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-xl); 
+    border-left: 4px solid var(--primary); 
+}
+
+.review-arabic { 
+    font-family: var(--font-ar); 
+    font-size: 1.25rem; 
+    line-height: 2; 
+    color: var(--text); 
+    padding: 1.5rem; 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-xl); 
+    border-right: 4px solid var(--secondary); 
+    text-align: right; 
+    direction: rtl; 
+}
+
+.review-explanation { 
+    margin-top: 1.5rem; 
+    padding: 1.5rem; 
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1)); 
+    border-radius: var(--radius-xl); 
+    border: 2px solid var(--primary); 
+}
+
+.review-explanation h4 { 
+    color: var(--primary); 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.review-explanation p { 
+    font-size: 1.125rem; 
+    line-height: 1.8; 
+}
+
+.review-example { 
+    margin-top: 1.5rem; 
+    padding: 1.5rem; 
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); 
+    border-radius: var(--radius-xl); 
+    border: 2px dashed var(--secondary); 
+}
+
+.review-example h4 { 
+    color: var(--secondary); 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.review-example p { 
+    font-size: 1.125rem; 
+    line-height: 1.8; 
+}
+
+.review-exam-question { 
+    margin-top: 1.5rem; 
+    padding: 1.5rem; 
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1)); 
+    border-radius: var(--radius-xl); 
+    border: 2px solid var(--danger); 
+}
+
+.review-exam-question h4 { 
+    color: var(--danger); 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.review-exam-question p { 
+    font-size: 1.125rem; 
+    line-height: 1.8; 
+}
+
+/* Quiz Section */
+.quiz-container { 
+    max-width: 1200px; 
+    margin: 1.5rem auto; 
+    padding: 1.5rem; 
+}
+
+.quiz-controls { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 1.5rem; 
+    flex-wrap: wrap; 
+    gap: 1.5rem; 
+}
+
+.quiz-timer { 
+    background: linear-gradient(135deg, var(--accent), var(--danger)); 
+    color: white; 
+    padding: 1rem 1.5rem; 
+    border-radius: var(--radius-xl); 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    box-shadow: var(--shadow); 
+}
+
+.quiz-stats { 
+    display: flex; 
+    gap: 1.5rem; 
+    flex-wrap: wrap; 
+}
+
+.stat-badge { 
+    background: var(--bg-secondary); 
+    padding: 1rem 1.5rem; 
+    border-radius: var(--radius-xl); 
+    border: 2px solid var(--border); 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    font-weight: 700; 
+}
+
+.question-card { 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-2xl); 
+    padding: 1.5rem; 
+    margin-bottom: 1.5rem; 
+    box-shadow: var(--shadow); 
+    border-right: 5px solid var(--primary); 
+    position: relative; 
+    transition: var(--transition-all); 
+}
+
+.question-card:hover { 
+    transform: translateY(-2px); 
+    box-shadow: var(--shadow-lg); 
+}
+
+.question-card.answered { 
+    border-right-color: var(--secondary); 
+}
+
+.question-difficulty { 
+    position: absolute; 
+    top: 1.5rem; 
+    left: 1.5rem; 
+    padding: 0.25rem 0.5rem; 
+    border-radius: var(--radius-sm); 
+    font-size: 0.75rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+}
+
+.difficulty-easy { 
+    background: var(--secondary); 
+    color: white; 
+}
+
+.difficulty-medium { 
+    background: var(--accent); 
+    color: white; 
+}
+
+.difficulty-hard { 
+    background: var(--danger); 
+    color: white; 
+}
+
+.question-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-bottom: 1.5rem; 
+    gap: 1.5rem; 
+}
+
+.question-number { 
+    background: var(--primary); 
+    color: white; 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    font-size: 1.25rem; 
+    flex-shrink: 0; 
+    box-shadow: var(--shadow); 
+    order: 2; 
+}
+
+.question-text { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    font-family: var(--font-en); 
+    text-align: right; 
+    direction: ltr; 
+    flex: 1; 
+    line-height: 1.8; 
+    order: 1; 
+    padding-left: 1.5rem; 
+}
+
+.options { 
+    display: grid; 
+    gap: 0.75rem; 
+}
+
+.option { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.75rem; 
+    padding: 1rem; 
+    background: var(--bg); 
+    border: 2px solid var(--border); 
+    border-radius: var(--radius-xl); 
+    cursor: pointer; 
+    transition: var(--transition-all); 
+}
+
+.option:hover { 
+    background: var(--bg-secondary); 
+    border-color: var(--primary); 
+    transform: translateX(-5px); 
+}
+
+.option-letter { 
+    width: 35px; 
+    height: 35px; 
+    min-width: 35px; 
+    background: var(--primary); 
+    color: white; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    font-size: 1.125rem; 
+    flex-shrink: 0; 
+}
+
+.option-text { 
+    flex: 1; 
+    font-family: var(--font-en); 
+    text-align: right; 
+    direction: ltr; 
+    font-size: 1.125rem; 
+}
+
+.option.selected { 
+    background: rgba(99, 102, 241, 0.1); 
+    border-color: var(--primary); 
+    border-width: 3px; 
+}
+
+.option.correct { 
+    background: rgba(16, 185, 129, 0.1); 
+    border-color: var(--secondary); 
+    border-width: 3px; 
+}
+
+.option.correct .option-letter { 
+    background: var(--secondary); 
+}
+
+.option.wrong { 
+    background: rgba(239, 68, 68, 0.1); 
+    border-color: var(--danger); 
+    border-width: 3px; 
+}
+
+.option.wrong .option-letter { 
+    background: var(--danger); 
+}
+
+.explanation { 
+    margin-top: 1.5rem; 
+    padding: 1.5rem; 
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(16, 185, 129, 0.05)); 
+    border-radius: var(--radius-xl); 
+    border: 2px solid var(--secondary); 
+    display: none; 
+}
+
+.explanation.show { 
+    display: block; 
+    animation: slideDown 0.5s ease; 
+}
+
+@keyframes slideDown { 
+    from { opacity: 0; max-height: 0; } 
+    to { opacity: 1; max-height: 1000px; } 
+}
+
+.dual-content { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1.5rem; 
+}
+
+.arabic-content { 
+    text-align: right; 
+    direction: rtl; 
+    padding: 1rem; 
+    background: var(--bg); 
+    border-radius: var(--radius-xl); 
+    border-right: 4px solid var(--secondary); 
+    font-family: var(--font-ar); 
+}
+
+.english-content { 
+    text-align: left; 
+    direction: ltr; 
+    padding: 1rem; 
+    background: var(--bg); 
+    border-radius: var(--radius-xl); 
+    border-left: 4px solid var(--primary); 
+    font-family: var(--font-en); 
+}
+
+.submit-section { 
+    text-align: center; 
+    margin: 1.5rem 0; 
+}
+
+.submit-btn { 
+    background: linear-gradient(135deg, var(--secondary), #059669); 
+    color: white; 
+    border: none; 
+    padding: 1rem 2rem; 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    border-radius: var(--radius-xl); 
+    cursor: pointer; 
+    transition: var(--transition-all); 
+    box-shadow: var(--shadow); 
+}
+
+.submit-btn:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); 
+}
+
+.results { 
+    background: var(--bg); 
+    border-radius: var(--radius-2xl); 
+    padding: 2rem; 
+    margin: 1.5rem 0; 
+    box-shadow: var(--shadow); 
+    text-align: center; 
+    display: none; 
+}
+
+.results.show { 
+    display: block; 
+    animation: fadeInPage 0.5s ease; 
+}
+
+.score-circle { 
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%; 
+    background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+    color: white; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto 1.5rem; 
+    font-size: 3rem; 
+    font-weight: 700; 
+    box-shadow: var(--shadow); 
+}
+
+.stats { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 1.5rem; 
+    margin: 1.5rem 0; 
+}
+
+.stat-item { 
+    background: var(--bg-secondary); 
+    padding: 1.5rem; 
+    border-radius: var(--radius-xl); 
+    text-align: center; 
+    box-shadow: var(--shadow); 
+}
+
+.stat-number { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    color: var(--primary); 
+    margin-bottom: 0.5rem; 
+}
+
+.stat-label { 
+    font-size: 0.875rem; 
+    color: var(--text-secondary); 
+    font-weight: 600; 
+}
+
+/* Words Test Section */
+.words-question-card { 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-2xl); 
+    padding: 1.5rem; 
+    margin-bottom: 1.5rem; 
+    box-shadow: var(--shadow); 
+    border-right: 5px solid var(--secondary); 
+}
+
+.word-display { 
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    text-align: center; 
+    margin: 1.5rem 0; 
+    color: var(--primary); 
+    font-family: var(--font-en); 
+    padding: 1.5rem; 
+    background: var(--bg); 
+    border-radius: var(--radius-xl); 
+    box-shadow: var(--shadow); 
+}
+
+.words-option { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.75rem; 
+    padding: 1rem; 
+    background: var(--bg); 
+    border: 2px solid var(--border); 
+    border-radius: var(--radius-xl); 
+    cursor: pointer; 
+    transition: var(--transition-all); 
+    font-family: var(--font-ar); 
+    text-align: right; 
+}
+
+.words-option:hover { 
+    background: var(--bg-secondary); 
+    border-color: var(--secondary); 
+    transform: translateX(-5px); 
+}
+
+.words-option-letter { 
+    width: 35px; 
+    height: 35px; 
+    min-width: 35px; 
+    background: var(--secondary); 
+    color: white; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    flex-shrink: 0; 
+}
+
+.words-option.selected { 
+    background: rgba(16, 185, 129, 0.1); 
+    border-color: var(--secondary); 
+    border-width: 3px; 
+}
+
+.words-option.correct { 
+    background: rgba(16, 185, 129, 0.2); 
+    border-color: var(--secondary); 
+    border-width: 3px; 
+}
+
+.words-option.correct .words-option-letter { 
+    background: var(--secondary); 
+}
+
+.words-option.wrong { 
+    background: rgba(239, 68, 68, 0.2); 
+    border-color: var(--danger); 
+    border-width: 3px; 
+}
+
+.words-option.wrong .words-option-letter { 
+    background: var(--danger); 
+}
+
+/* Tricks Section */
+.trick-card { 
+    background: var(--bg-secondary); 
+    border-radius: var(--radius-2xl); 
+    padding: 1.5rem; 
+    margin-bottom: 1.5rem; 
+    box-shadow: var(--shadow); 
+    border-right: 5px solid var(--accent); 
+}
+
+.trick-header { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.75rem; 
+    margin-bottom: 1.5rem; 
+}
+
+.trick-icon { 
+    font-size: 1.75rem; 
+}
+
+.trick-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    color: var(--accent); 
+}
+
+.trick-analysis { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1.5rem; 
+}
+
+.analysis-arabic { 
+    text-align: right; 
+    direction: rtl; 
+    padding: 1rem; 
+    background: var(--bg); 
+    border-radius: var(--radius-xl); 
+    border-right: 4px solid var(--accent); 
+    font-family: var(--font-ar); 
+}
+
+.analysis-english { 
+    text-align: left; 
+    direction: ltr; 
+    padding: 1rem; 
+    background: var(--bg); 
+    border-radius: var(--radius-xl); 
+    border-left: 4px solid var(--primary); 
+    font-family: var(--font-en); 
+}
+
+.developer-signature { 
+    text-align: center; 
+    margin-top: 1.5rem; 
+    padding: 1rem; 
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1)); 
+    border-radius: var(--radius-xl); 
+    border: 2px dashed var(--accent); 
+}
+
+.signature-text { 
+    font-size: 1.125rem; 
+    font-weight: 700; 
+    color: var(--accent); 
+    font-style: italic; 
+}
+
+/* Footer */
+footer { 
+    background: linear-gradient(135deg, #1E40AF 0%, #2563EB 50%, #10B981 100%); 
+    color: white; 
+    padding: 3rem 1.5rem; 
+    margin-top: 3rem; 
+    border-top: 5px solid var(--accent); 
+    position: relative; 
+    overflow: auto; 
+}
+
+footer::before { 
+    content: ''; 
+    position: absolute; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%; 
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); 
+    background-size: 50px 50px; 
+    animation: moveBackground 20s linear infinite; 
+}
+
+@keyframes moveBackground { 
+    0% { transform: translate(0, 0); } 
+    100% { transform: translate(50px, 50px); } 
+}
+
+.footer-content { 
+    position: relative; 
+    z-index: 1; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    text-align: center; 
+}
+
+.footer-title { 
+    font-size: 2.5rem; 
+    font-weight: 900; 
+    margin-bottom: 1.5rem; 
+}
+
+.contact-links { 
+    display: flex; 
+    justify-content: center; 
+    gap: 1.5rem; 
+    flex-wrap: wrap; 
+    margin: 3rem 0; 
+}
+
+.contact-item { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 0.5rem; 
+    padding: 1.5rem; 
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: var(--radius-2xl); 
+    color: white; 
+    text-decoration: none; 
+    transition: var(--transition-all); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border: 2px solid rgba(255, 255, 255, 0.2); 
+    min-width: 200px; 
+}
+
+.contact-item:hover { 
+    transform: translateY(-5px) scale(1.05); 
+    background: rgba(255, 255, 255, 0.2); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+}
+
+.contact-icon { 
+    font-size: 3rem; 
+}
+
+.contact-text { 
+    font-size: 1.25rem; 
+    font-weight: 800; 
+}
+
+.contact-number { 
+    font-size: 1.5rem; 
+    font-weight: 900; 
+    color: #FFD700; 
+}
+
+.footer-dedication { 
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: var(--radius-2xl); 
+    padding: 3rem 1.5rem; 
+    margin: 3rem auto; 
+    max-width: 900px; 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border: 3px solid rgba(255, 215, 0, 0.3); 
+}
+
+.dedication-icon { 
+    font-size: 5rem; 
+    margin-bottom: 1rem; 
+}
+
+.footer-dedication h3 { 
+    font-size: 2.5rem; 
+    margin-bottom: 1.5rem; 
+    color: #FFD700; 
+    font-weight: 900; 
+}
+
+.dedication-text { 
+    font-size: 1.25rem; 
+    line-height: 2.2; 
+    font-weight: 700; 
+    font-family: var(--font-ar); 
+    text-align: center; 
+}
+
+.dedication-text strong { 
+    color: #FFD700; 
+    font-size: 1.125rem; 
+}
+
+.footer-developer { 
+    border-top: 3px solid rgba(255, 255, 255, 0.3); 
+    padding-top: 3rem; 
+    margin-top: 3rem; 
+}
+
+.developer-line { 
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    margin-bottom: 1rem; 
+    font-family: var(--font-en); 
+}
+
+.developer-highlight { 
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B6B 100%); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text; 
+    font-weight: 900; 
+    font-size: 1.875rem; 
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)); 
+}
+
+.university-line { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    margin-bottom: 1rem; 
+    font-family: var(--font-en); 
+}
+
+.copyright-line { 
+    font-size: 1rem; 
+    opacity: 0.9; 
+    font-family: var(--font-en); 
+}
+
+/* WhatsApp Button */
+.whatsapp-float { 
+    position: fixed; 
+    bottom: 30px; 
+    left: 30px; 
+    background: #25D366; 
+    color: white; 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 28px; 
+    box-shadow: var(--shadow); 
+    cursor: pointer; 
+    transition: var(--transition-all); 
+    z-index: 1000; 
+    text-decoration: none; 
+}
+
+.whatsapp-float:hover { 
+    transform: scale(1.1); 
+}
+
+/* Interactive Message */
+.interactive-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-2xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-2xl);
+    z-index: 2000;
+    display: none;
+    text-align: center;
+    max-width: 90%;
+    border: 2px solid var(--primary);
+}
+
+body.dark-mode .interactive-message {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: var(--primary);
+}
+
+.message-content {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-family: var(--font-ar);
+}
+
+.message-arabic {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-ar);
+}
+
+.message-close {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+.message-close:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) { 
+    .header-container { 
+        padding: 0.5rem 1rem; 
+    } 
+    
+    .main-nav { 
+        width: 100%; 
+        justify-content: center; 
+    } 
+    
+    .main-nav a { 
+        font-size: 1rem; 
+        padding: 0.75rem 1rem; 
+    } 
+}
+
+@media (max-width: 768px) { 
+    html { 
+        font-size: 14px; 
+    } 
+    
+    .dual-text-row { 
+        grid-template-columns: 1fr; 
+        gap: 1rem; 
+    } 
+    
+    .english-side { 
+        grid-column: 1; 
+        order: 1; 
+    } 
+    
+    .arrow-separator { 
+        grid-column: 1; 
+        order: 2; 
+        transform: rotate(90deg); 
+        margin: 0.5rem 0; 
+    } 
+    
+    .arabic-side { 
+        grid-column: 1; 
+        order: 3; 
+    } 
+    
+    .flashcard { 
+        height: 350px; 
+    } 
+    
+    .flashcard-front h2 { 
+        font-size: 2.5rem; 
+    } 
+    
+    .flashcard-back h2 { 
+        font-size: 2rem; 
+    } 
+    
+    .flashcard-back h3 { 
+        font-size: 1.5rem; 
+    } 
+    
+    .btn-control { 
+        padding: 0.75rem 1.5rem; 
+        font-size: 1rem; 
+    } 
+    
+    .comparison-header, .comparison-row { 
+        grid-template-columns: 1fr; 
+    } 
+    
+    .contact-links { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 1rem; 
+    } 
+    
+    .contact-item { 
+        width: 100%; 
+        max-width: 300px; 
+    } 
+    
+    .footer-dedication { 
+        padding: 1.5rem 1rem; 
+    } 
+    
+    .dedication-text { 
+        font-size: 1rem; 
+    } 
+    
+    .dedication-icon { 
+        font-size: 3rem; 
+    } 
+    
+    .dual-content { 
+        grid-template-columns: 1fr; 
+    } 
+    
+    .trick-analysis { 
+        grid-template-columns: 1fr; 
+    } 
+}
+
+@media (max-width: 640px) { 
+    .site-title { 
+        font-size: 1.125rem; 
+    } 
+    
+    .developer-name { 
+        font-size: 0.875rem; 
+    } 
+    
+    .main-nav a { 
+        font-size: 0.875rem; 
+        padding: 0.5rem 0.75rem; 
+    } 
+    
+    .page { 
+        padding: 100px 0.75rem 1rem; 
+    } 
+    
+    .concept-slide, .comparison-container, .review-section { 
+        padding: 1rem; 
+    } 
+    
+    .sub-concept, .professor-explanation, .practical-example, .doctor-note { 
+        padding: 1.5rem; 
+    } 
+    
+    .professor-explanation p, .practical-example p, .doctor-note p { 
+        font-size: 1rem; 
+    } 
+    
+    .numbers-container { 
+        padding: 1rem; 
+    } 
+    
+    .number-highlight { 
+        font-size: 4rem; 
+    } 
+    
+    .review-content { 
+        gap: 1rem; 
+    } 
+    
+    .question-header { 
+        flex-direction: column; 
+        align-items: flex-end; 
+        gap: 0.5rem; 
+    } 
+    
+    .question-number { 
+        order: 1; 
+    } 
+    
+    .question-text { 
+        order: 2; 
+        padding-left: 0; 
+    } 
+    
+    .word-display { 
+        font-size: 2rem; 
+    } 
+}
+
+@media (max-width: 480px) { 
+    .flashcard { 
+        height: 300px; 
+    } 
+}
+</style>
+</head>
+<body>
+<!-- Header -->
+<header id="main-header">
+    <div class="header-container">
+        <!-- Hamburger Menu -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="logo-section">
+            <div class="site-title">📚 Interactive Learning Platform - Health and Illness</div>
+            <div class="developer-name">by Mohamed Salah</div>
+        </div>
+        
+        <div class="header-controls">
+            <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+
+        <!-- Navigation Container -->
+        <div class="nav-container" id="nav-container">
+            <nav class="main-nav">
+                <a href="#" data-page="page1" class="nav-link active">🎴 Flashcards</a>
+                <a href="#" data-page="page2" class="nav-link">📖 Detailed Explanation</a>
+                <a href="#" data-page="page3" class="nav-link">🔄 Comparisons</a>
+                <a href="#" data-page="page4" class="nav-link">🔢 Important Numbers</a>
+                <a href="#" data-page="page5" class="nav-link">📝 Final Review</a>
+                <a href="#" data-page="page6" class="nav-link">❓ Question Bank</a>
+                <a href="#" data-page="page7" class="nav-link">💡 Exam Tricks</a>
+                <a href="#" data-page="page8" class="nav-link">📚 Words Test</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Interactive Message -->
+<div class="interactive-message" id="interactive-message">
+    <div class="message-content">صل على النبي ﷺ</div>
+    <div class="message-arabic">Pray upon the Prophet Muhammad ﷺ</div>
+    <button class="message-close" id="message-close">Close</button>
+</div>
+
+<!-- Page 1: Flashcards -->
+<div id="page1" class="page active-page">
+    <h1>🎴 Flashcards - البطاقات التعليمية</h1>
+    <div class="flashcard-section">
+        <div class="flashcard" id="flashcard">
+            <div class="flashcard-inner">
+                <div class="flashcard-front">
+                    <h2 id="card-front-text">Health</h2>
+                </div>
+                <div class="flashcard-back" id="card-back">
+                    <!-- Content will be populated by JS -->
+                </div>
+            </div>
+        </div>
+        <div class="flashcard-counter">
+            <span id="current-card">1</span> / <span id="total-cards">15</span>
+        </div>
+        <div class="flashcard-controls-container">
+            <div class="flashcard-controls">
+                <button id="prev-card" class="btn-control">⏮️ Previous</button>
+                <button id="flip-card" class="btn-control">🔄 Flip</button>
+                <button id="speak-card" class="btn-control">🔊 Speak</button>
+                <button id="next-card" class="btn-control">Next ⏭️</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 2: Detailed Explanation -->
+<div id="page2" class="page">
+    <h1>📖 Detailed Explanation - الشرح المفصل</h1>
+    <div class="concept-slide numbered-section" id="detailed-explanation">
+        <!-- Content will be populated by JS -->
+    </div>
+</div>
+
+<!-- Page 3: Comparisons -->
+<div id="page3" class="page">
+    <h1>🔄 Key Comparisons - المقارنات الأساسية</h1>
+    <div class="comparison-container numbered-section" id="comparisons">
+        <!-- Content will be populated by JS -->
+    </div>
+</div>
+
+<!-- Page 4: Important Numbers -->
+<div id="page4" class="page">
+    <h1>🔢 Important Numbers - الأرقام المهمة</h1>
+    <div class="numbers-container numbered-section" id="important-numbers">
+        <!-- Content will be populated by JS -->
+    </div>
+</div>
+
+<!-- Page 5: Final Review -->
+<div id="page5" class="page">
+    <h1>📝 Final Review - المراجعة النهائية</h1>
+    <div class="review-section numbered-section" id="final-review">
+        <!-- Content will be populated by JS -->
+    </div>
+</div>
+
+<!-- Page 6: Question Bank -->
+<div id="page6" class="page">
+    <h1>❓ Question Bank - بنك الأسئلة</h1>
+    <div class="quiz-container">
+        <div class="quiz-controls">
+            <div class="quiz-timer">
+                <i class="fas fa-clock"></i>
+                <span id="quiz-timer">15:00</span>
+            </div>
+            <div class="quiz-stats">
+                <div class="stat-badge">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="answered-count">0</span>
+                    <span>مجاب</span>
+                </div>
+                <div class="stat-badge">
+                    <i class="fas fa-question-circle"></i>
+                    <span id="remaining-count">15</span>
+                    <span>متبقي</span>
+                </div>
+            </div>
+        </div>
+        <div id="quiz-questions">
+            <!-- Questions will be generated here -->
+        </div>
+        <div class="submit-section">
+            <button class="submit-btn" id="submit-quiz">
+                <i class="fas fa-paper-plane"></i>
+                📝 إنهاء الامتحان
+            </button>
+        </div>
+        <div id="quiz-results" class="results"></div>
+    </div>
+</div>
+
+<!-- Page 7: Exam Tricks -->
+<div id="page7" class="page">
+    <h1>💡 Exam Tricks - تريكات الامتحان</h1>
+    <div id="tricks-content">
+        <!-- Tricks will be generated here -->
+    </div>
+    <div class="developer-signature">
+        <div class="signature-text">By Mohamed Salah</div>
+    </div>
+</div>
+
+<!-- Page 8: Words Test -->
+<div id="page8" class="page">
+    <h1>📚 Words Test - اختبار المصطلحات</h1>
+    <div class="quiz-container">
+        <div class="quiz-controls">
+            <div class="quiz-timer">
+                <i class="fas fa-clock"></i>
+                <span id="words-timer">10:00</span>
+            </div>
+            <div class="quiz-stats">
+                <div class="stat-badge">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="words-answered-count">0</span>
+                    <span>مجاب</span>
+                </div>
+                <div class="stat-badge">
+                    <i class="fas fa-language"></i>
+                    <span id="words-remaining-count">10</span>
+                    <span>متبقي</span>
+                </div>
+            </div>
+        </div>
+        <div id="words-questions">
+            <!-- Words questions will be generated here -->
+        </div>
+        <div class="submit-section">
+            <button class="submit-btn" id="submit-words">
+                <i class="fas fa-paper-plane"></i>
+                📝 إنهاء الاختبار
+            </button>
+        </div>
+        <div id="words-results" class="results"></div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <h3 class="footer-title">📞 Contact Us - تواصل معنا</h3>
+        <div class="contact-links">
+            <a href="https://wa.me/201121833902" target="_blank" class="contact-item">
+                <span class="contact-icon">📱</span>
+                <span class="contact-text">WhatsApp</span>
+                <span class="contact-number">01121833902</span>
+            </a>
+            <a href="tel:+201012575443" class="contact-item">
+                <span class="contact-icon">📞</span>
+                <span class="contact-text">Phone</span>
+                <span class="contact-number">01012575443</span>
+            </a>
+            <a href="https://www.facebook.com/share/14MZDTy8cxk/" target="_blank" class="contact-item">
+                <span class="contact-icon">👤</span>
+                <span class="contact-text">Facebook</span>
+                <span class="contact-number">Follow Us</span>
+            </a>
+        </div>
+        <div class="footer-dedication">
+            <div class="dedication-icon">🤲🏻</div>
+            <h3>صدقة جارية</h3>
+            <p class="dedication-text">
+                صدقة جارية لي ولأمواتي وأموات المسلمين جميعاً وأهلي<br><br>
+                <strong>اللهم اغفر لهم وارحمهم وعافهم واعف عنهم<br>
+                وأكرم نزلهم ووسع مدخلهم<br>
+                واغسلهم بالماء والثلج والبرد<br>
+                ونقهم من الخطايا كما ينقى الثوب الأبيض من الدنس<br>
+                وأبدلهم داراً خيراً من دارهم وأهلاً خيراً من أهلهم<br>
+                وأدخلهم الجنة وأعذهم من عذاب القبر ومن عذاب النار<br>
+                واجعل قبورهم روضة من رياض الجنة</strong><br><br>
+                آمين يا رب العالمين 🤲🏻
+            </p>
+        </div>
+        <div class="footer-developer">
+            <p class="developer-line">
+                Developed by <span class="developer-highlight">Mohamed Salah</span>
+            </p>
+            <p class="university-line">
+                1st Nurse - KSIU (King Salman International University)
+            </p>
+            <p class="copyright-line">
+                © 2025 - All Rights Reserved
+            </p>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/201121833902" target="_blank" class="whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+'use strict';
+
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize variables
+    let currentCardIndex = 0;
+    let quizAnswers = [];
+    let wordsAnswers = [];
+    let quizTimerInterval = null;
+    let wordsTimerInterval = null;
+    let quizTimeLeft = 15 * 60; // 15 minutes
+    let wordsTimeLeft = 10 * 60; // 10 minutes
+    let selectedUsVoice = null; // To store the selected US voice
+    
+    // Flashcards data
+    const flashcardsData = [
+        { 
+            front: "Health", 
+            back: { 
+                term: "Health", 
+                translation: "الصحة", 
+                english: "A state of complete physical, mental, and social well-being, and not merely the absence of disease or infirmity.", 
+                arabic: "حالة من الرفاهية الجسدية والعقلية والاجتماعية الكاملة، وليست مجرد غياب المرض أو العجز." 
+            } 
+        },
+        { 
+            front: "Wellness", 
+            back: { 
+                term: "Wellness", 
+                translation: "الرفاهية", 
+                english: "A dynamic process that is ever changing. The well person usually has some degree of illness and the ill person usually has some degree of wellness.", 
+                arabic: "عملية ديناميكية متغيرة باستمرار. الشخص السليم عادة ما يكون لديه درجة من المرض، والشخص المريض عادة ما يكون لديه درجة من الرفاهية." 
+            } 
+        },
+        { 
+            front: "Health-Illness Continuum", 
+            back: { 
+                term: "Health-Illness Continuum", 
+                translation: "مستمر الصحة-المرض", 
+                english: "A concept that allows health to be placed on a continuum from one's optimal level ('wellness') to a maladaptive state ('illness').", 
+                arabic: "مفهوم يسمح بوضع الصحة على مستمر من المستوى الأمثل ('الرفاهية') إلى الحالة غير التكيفية ('المرض')." 
+            } 
+        },
+        { 
+            front: "Physical Wellness", 
+            back: { 
+                term: "Physical Wellness", 
+                translation: "الرفاهية الجسدية", 
+                english: "The ability to carry out daily tasks, achieve fitness, maintain adequate nutrition and proper body fat, avoid abusing drugs and alcohol or using tobacco products, and generally to practice positive lifestyle habits.", 
+                arabic: "القدرة على أداء المهام اليومية، وتحقيق اللياقة البدنية، والحفاظ على التغذية الكافية والدهون الجسمية المناسبة، وتجنب إساءة استخدام المخدرات والكحول أو استخدام منتجات التبغ، وممارسة عادات نمط الحياة الإيجابية بشكل عام." 
+            } 
+        },
+        { 
+            front: "Social Wellness", 
+            back: { 
+                term: "Social Wellness", 
+                translation: "الرفاهية الاجتماعية", 
+                english: "The ability to interact successfully with people and within the environment.", 
+                arabic: "القدرة على التفاعل بنجاح مع الناس وفي البيئة المحيطة." 
+            } 
+        },
+        { 
+            front: "Emotional Wellness", 
+            back: { 
+                term: "Emotional Wellness", 
+                translation: "الرفاهية العاطفية", 
+                english: "The ability to manage stress and to express emotions appropriately. Emotional wellness involves the ability to recognize, accept, and express feelings.", 
+                arabic: "القدرة على إدارة التوتر والتعبير عن المشاعر بشكل مناسب. تتضمن الرفاهية العاطفية القدرة على التعرف على المشاعر وقبولها والتعبير عنها." 
+            } 
+        },
+        { 
+            front: "Intellectual Wellness", 
+            back: { 
+                term: "Intellectual Wellness", 
+                translation: "الرفاهية الفكرية", 
+                english: "The ability to learn and use information effectively for personal, family, and career development.", 
+                arabic: "القدرة على التعلم واستخدام المعلومات بفعالية للتطور الشخصي والعائلي والمهني." 
+            } 
+        },
+        { 
+            front: "Spiritual Wellness", 
+            back: { 
+                term: "Spiritual Wellness", 
+                translation: "الرفاهية الروحية", 
+                english: "The belief in some force (nature, science, religion, or a higher power) that serves to unite human beings and provide meaning and purpose of life.", 
+                arabic: "الإيمان بقوة معينة (الطبيعة، العلم، الدين، أو قوة عليا) تعمل على توحيد البشر وتوفير المعنى والغاية من الحياة." 
+            } 
+        },
+        { 
+            front: "Occupational Wellness", 
+            back: { 
+                term: "Occupational Wellness", 
+                translation: "الرفاهية المهنية", 
+                english: "The ability to achieve a balance between work and leisure time. A person's beliefs about education, employment, and home influence personal satisfaction and relationships with others.", 
+                arabic: "القدرة على تحقيق التوازن بين العمل ووقت الفراغ. تؤثر معتقدات الشخص حول التعليم والعمل والمنزل على الرضا الشخصي والعلاقات مع الآخرين." 
+            } 
+        },
+        { 
+            front: "Environmental Wellness", 
+            back: { 
+                term: "Environmental Wellness", 
+                translation: "الرفاهية البيئية", 
+                english: "The ability to promote health measures that improve the standard of living and quality of life in the community.", 
+                arabic: "القدرة على تعزيز التدابير الصحية التي تحسن مستوى المعيشة وجودة الحياة في المجتمع." 
+            } 
+        },
+        { 
+            front: "Internal Factors", 
+            back: { 
+                term: "Internal Factors", 
+                translation: "العوامل الداخلية", 
+                english: "Factors affecting health status that include genetic makeup, sex, age (Biologic dimension), emotional factors including mind-body interactions and self-concept (Psychological dimension), and lifestyle choices and spiritual and religious beliefs (Cognitive dimension).", 
+                arabic: "العوامل التي تؤثر على الحالة الصحية وتشمل التكوين الجيني، والجنس، والعمر (البعد البيولوجي)، والعوامل العاطفية بما في ذلك تفاعلات العقل والجسم ومفهوم الذات (البعد النفسي)، واختيارات نمط الحياة والمعتقدات الروحية والدينية (البعد المعرفي)." 
+            } 
+        },
+        { 
+            front: "External Factors", 
+            back: { 
+                term: "External Factors", 
+                translation: "العوامل الخارجية", 
+                english: "Factors affecting health status that include environment, standards of living (reflecting occupation, income, and education), family and cultural beliefs, and social support networks.", 
+                arabic: "العوامل التي تؤثر على الحالة الصحية وتشمل البيئة، ومستويات المعيشة (تعكس المهنة والدخل والتعليم)، ومعتقدات الأسرة والثقافة، وشبكات الدعم الاجتماعي." 
+            } 
+        },
+        { 
+            front: "Illness", 
+            back: { 
+                term: "Illness", 
+                translation: "المرض", 
+                english: "A highly personal state in which the person's physical, emotional, intellectual, social, developmental, or spiritual functioning is thought to be diminished. Illness is usually associated with disease but may occur independently of it.", 
+                arabic: "حالة شخصية للغاية يُعتقد فيها أن وظائف الشخص الجسدية أو العاطفية أو الفكرية أو الاجتماعية أو النمائية أو الروحية قد تضاءلت. يرتبط المرض عادة بالمرض العضوي ولكنه قد يحدث بشكل مستقل عنه." 
+            } 
+        },
+        { 
+            front: "Disease", 
+            back: { 
+                term: "Disease", 
+                translation: "المرض العضوي", 
+                english: "An alteration in body functions resulting in a reduction of capacities or shortening of the normal life span. The causation of a disease is called its etiology.", 
+                arabic: "تغيير في وظائف الجسم ينتج عنه انخفاض في القدرات أو تقصير في مدة الحياة الطبيعية. يُطلق على سبب المرض اسم مسبباته." 
+            } 
+        },
+        { 
+            front: "Acute Illness", 
+            back: { 
+                term: "Acute Illness", 
+                translation: "المرض الحاد", 
+                english: "Typically characterized by severe symptoms of relatively short duration.", 
+                arabic: "يتميز عادة بأعراض شديدة لمدة قصيرة نسبياً." 
+            } 
+        },
+        { 
+            front: "Chronic Illness", 
+            back: { 
+                term: "Chronic Illness", 
+                translation: "المرض المزمن", 
+                english: "One that lasts for an extended period, usually 6 months or longer, and often for person's life.", 
+                arabic: "مرض يستمر لفترة طويلة، عادة 6 أشهر أو أكثر، وغالباً مدى حياة الشخص." 
+            } 
+        }
+    ];
+    
+    // Quiz data with difficulty levels
+    const quizData = [
+        // Easy questions (5)
+        { 
+            question: "According to the WHO definition, health is:", 
+            options: ["The absence of disease", "A state of complete physical, mental, and social well-being", "The ability to perform daily activities", "Normal vital signs"], 
+            correct: 1, 
+            difficulty: "easy",
+            explanation: { 
+                english: "The WHO defines health as 'a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.'", 
+                arabic: "تعرّف منظمة الصحة العالمية الصحة بأنها 'حالة من الرفاهية الجسدية والعقلية والاجتماعية الكاملة، وليست مجرد غياب المرض أو العجز'." 
+            } 
+        },
+        { 
+            question: "The health-illness continuum concept suggests that:", 
+            options: ["Health and illness are opposite states", "A person can have degrees of both wellness and illness simultaneously", "Illness is always present when disease is present", "Wellness is only possible when there is no disease"], 
+            correct: 1, 
+            difficulty: "easy",
+            explanation: { 
+                english: "The health-illness continuum concept negates the idea that wellness and illness are opposite because they may occur simultaneously in the same person in varying degrees.", 
+                arabic: "مفهوم مستمر الصحة-المرض يبطل فكرة أن الرفاهية والمرض متضادان لأنهما قد يحدثان في نفس الوقت في نفس الشخص بدرجات متفاوتة." 
+            } 
+        },
+        { 
+            question: "Which of the following is NOT a dimension of wellness?", 
+            options: ["Physical", "Social", "Financial", "Spiritual"], 
+            correct: 2, 
+            difficulty: "easy",
+            explanation: { 
+                english: "The seven dimensions of wellness are: Physical, Social, Emotional, Intellectual, Spiritual, Occupational, and Environmental. Financial is not included as a dimension of wellness in this framework.", 
+                arabic: "الأبعاد السبعة للرفاهية هي: الجسدية، والاجتماعية، والعاطفية، والفكرية، والروحية، والمهنية، والبيئية. المالي غير مشمل كبعد للرفاهية في هذا الإطار." 
+            } 
+        },
+        { 
+            question: "Internal factors affecting health include:", 
+            options: ["Environment and standards of living", "Genetic makeup and age", "Family and cultural beliefs", "Social support networks"], 
+            correct: 1, 
+            difficulty: "easy",
+            explanation: { 
+                english: "Internal factors affecting health include genetic makeup, sex, age (Biologic dimension), emotional factors (Psychological dimension), and lifestyle choices and spiritual beliefs (Cognitive dimension).", 
+                arabic: "تشمل العوامل الداخلية المؤثرة على الصحة التكوين الجيني، والجنس، والعمر (البعد البيولوجي)، والعوامل العاطفية (البعد النفسي)، واختيارات نمط الحياة والمعتقدات الروحية (البعد المعرفي)." 
+            } 
+        },
+        { 
+            question: "The difference between illness and disease is that:", 
+            options: ["Illness is always associated with disease", "Disease is a physical alteration, while illness is the personal experience of feeling unwell", "Disease is psychological, while illness is physical", "There is no difference between the two terms"], 
+            correct: 1, 
+            difficulty: "easy",
+            explanation: { 
+                english: "Disease can be described as an alteration in body functions, while illness is a highly personal state in which the person feels unhealthy or ill. Illness may occur independently of disease.", 
+                arabic: "يمكن وصف المرض العضوي بأنه تغيير في وظائف الجسم، بينما المرض هو حالة شخصية للغاية يشعر فيها الشخص بأنه غير صحيح أو مريض. قد يحدث المرض بشكل مستقل عن المرض العضوي." 
+            } 
+        },
+        // Medium questions (5)
+        { 
+            question: "Which dimension of wellness involves the ability to manage stress and express emotions appropriately?", 
+            options: ["Physical wellness", "Social wellness", "Emotional wellness", "Intellectual wellness"], 
+            correct: 2, 
+            difficulty: "medium",
+            explanation: { 
+                english: "Emotional wellness is defined as the ability to manage stress and to express emotions appropriately. It involves the ability to recognize, accept, and express feelings.", 
+                arabic: "تُعرّف الرفاهية العاطفية بأنها القدرة على إدارة التوتر والتعبير عن المشاعر بشكل مناسب. تتضمن القدرة على التعرف على المشاعر وقبولها والتعبير عنها." 
+            } 
+        },
+        { 
+            question: "According to Nightingale, health is:", 
+            options: ["The absence of disease", "A state of complete well-being", "A state of being well and using every power the individual possesses to the fullest extent", "The ability to adapt to the environment"], 
+            correct: 2, 
+            difficulty: "medium",
+            explanation: { 
+                english: "Nightingale defined health as 'a state of being well and using every power the individual possesses to the fullest extent.'", 
+                arabic: "عرّفت نايتنجيل الصحة بأنها 'حالة من العافية واستخدام كل قوة يمتلكها الفرد إلى أقصى حد ممكن'." 
+            } 
+        },
+        { 
+            question: "Which statement best describes the relationship between wellness and illness?", 
+            options: ["They are mutually exclusive", "They exist on opposite ends of a continuum", "They can coexist in varying degrees", "Wellness is the absence of illness"], 
+            correct: 2, 
+            difficulty: "medium",
+            explanation: { 
+                english: "The concept of a health continuum negates the idea that wellness and illness are opposite because they may occur simultaneously in the same person in varying degrees.", 
+                arabic: "مفهوم مستمر الصحة يبطل فكرة أن الرفاهية والمرض متضادان لأنهما قد يحدثان في نفس الوقت في نفس الشخص بدرجات متفاوتة." 
+            } 
+        },
+        { 
+            question: "External factors affecting health include all of the following EXCEPT:", 
+            options: ["Genetic makeup", "Environment", "Standards of living", "Social support networks"], 
+            correct: 0, 
+            difficulty: "medium",
+            explanation: { 
+                english: "Genetic makeup is considered an internal factor affecting health. External factors include environment, standards of living, family and cultural beliefs, and social support networks.", 
+                arabic: "يُعتبر التكوين الجيني عاملاً داخلياً يؤثر على الصحة. تشمل العوامل الخارجية البيئة، ومستويات المعيشة، ومعتقدات الأسرة والثقافة، وشبكات الدعم الاجتماعي." 
+            } 
+        },
+        { 
+            question: "A chronic illness is one that:", 
+            options: ["Has severe symptoms of short duration", "Lasts for an extended period, usually 6 months or longer", "Is always life-threatening", "Cannot be managed with medication"], 
+            correct: 1, 
+            difficulty: "medium",
+            explanation: { 
+                english: "A chronic illness is one that lasts for an extended period, usually 6 months or longer, and often for the person's life.", 
+                arabic: "المرض المزمن هو مرض يستمر لفترة طويلة، عادة 6 أشهر أو أكثر، وغالباً مدى حياة الشخص." 
+            } 
+        },
+        // Hard questions (5)
+        { 
+            question: "The ANA (American Nurses Association) definition of health emphasizes that health:", 
+            options: ["Is merely the absence of disease", "Is an experience that may occur in the presence or absence of disease or injury", "Is determined solely by biological factors", "Cannot be achieved when illness is present"], 
+            correct: 1, 
+            difficulty: "hard",
+            explanation: { 
+                english: "The ANA (2004) stated that health was 'an experience that is often expressed in term of wellness and illness and may occur in the presence or absence of disease or injury.'", 
+                arabic: "ذكرت الجمعية الأمريكية للممرضين (2004) أن الصحة هي 'تجربة يُعبر عنها غالباً بمصطلحات الرفاهية والمرض وقد تحدث في وجود أو غياب المرض أو الإصابة'." 
+            } 
+        },
+        { 
+            question: "Which dimension of wellness is most directly related to 'the ability to promote health measures that improve the standard of living and quality of life in the community'?", 
+            options: ["Occupational wellness", "Environmental wellness", "Social wellness", "Spiritual wellness"], 
+            correct: 1, 
+            difficulty: "hard",
+            explanation: { 
+                english: "Environmental wellness is defined as 'the ability to promote health measures that improve the standard of living and quality of life in the community.'", 
+                arabic: "تُعرّف الرفاهية البيئية بأنها 'القدرة على تعزيز التدابير الصحية التي تحسن مستوى المعيشة وجودة الحياة في المجتمع'." 
+            } 
+        },
+        { 
+            question: "When a patient with a chronic disease reports feeling 'well' despite their physical limitations, this best illustrates:", 
+            options: ["The inconsistency between illness and disease", "The concept of the health-illness continuum", "The subjective nature of wellness", "The ineffectiveness of medical treatment"], 
+            correct: 2, 
+            difficulty: "hard",
+            explanation: { 
+                english: "This illustrates the subjective nature of wellness. A person can have a disease (objective medical condition) but still experience wellness (subjective feeling of well-being). This demonstrates that wellness and illness are not mutually exclusive and can coexist.", 
+                arabic: "هذا يوضح الطبيعة الذاتية للرفاهية. يمكن للشخص أن يكون لديه مرض (حالة طبية موضوعية) ولكنه لا يزال يشعر بالرفاهية (شعور ذاتي بالعافية). هذا يوضح أن الرفاهية والمرض ليسا متضادين ويمكن أن يتواجدا معاً." 
+            } 
+        },
+        { 
+            question: "A nurse assessing a patient's health status should consider:", 
+            options: ["Only physical symptoms and laboratory values", "The patient's subjective experience of health and illness", "Only objective measurements of physical function", "The absence of disease as the primary indicator of health"], 
+            correct: 1, 
+            difficulty: "hard",
+            explanation: { 
+                english: "A comprehensive health assessment should consider both objective data (physical symptoms, lab values) and the patient's subjective experience of health and illness. Health is not merely the absence of disease but includes physical, mental, social, and spiritual well-being.", 
+                arabic: "يجب أن تأخذ تقييم الصحة الشامل في الاعتبار كل من البيانات الموضوعية (الأعراض الجسدية، قيم المختبر) والتجربة الذاتية للمريض للصحة والمرض. الصحة ليست مجرد غياب المرض ولكن تشمل الرفاهية الجسدية والعقلية والاجتماعية والروحية." 
+            } 
+        },
+        { 
+            question: "The concept that 'the well person usually has some degree of illness and the ill person usually has some degree of wellness' suggests that nurses should:", 
+            options: ["Focus only on treating diseases", "Recognize that health exists on a continuum and provide care that addresses all dimensions of wellness", "Prioritize physical health over other dimensions", "Consider wellness and illness as mutually exclusive states"], 
+            correct: 1, 
+            difficulty: "hard",
+            explanation: { 
+                english: "This concept suggests that nurses should recognize that health exists on a continuum and provide holistic care that addresses all dimensions of wellness (physical, social, emotional, intellectual, spiritual, occupational, and environmental) rather than focusing solely on treating diseases.", 
+                arabic: "ي suggests هذا المفهوم أن الممرضين يجب أن يدركوا أن الصحة موجودة على مستمر ويقدمون رعاية شاملة تعالج جميع أبعاد الرفاهية (الجسدية، والاجتماعية، والعاطفية، والفكرية، والروحية، والمهنية، والبيئية) بدلاً من التركيز فقط على علاج الأمراض." 
+            } 
+        }
+    ];
+    
+    // Words test data
+    const wordsData = [
+        { 
+            word: "Health", 
+            options: ["المرض", "الصحة", "العافية", "الرفاهية"], 
+            correct: 1 
+        },
+        { 
+            word: "Wellness", 
+            options: ["المرض", "الصحة", "العافية", "الرفاهية"], 
+            correct: 3 
+        },
+        { 
+            word: "Illness", 
+            options: ["المرض", "الصحة", "العافية", "الرفاهية"], 
+            correct: 0 
+        },
+        { 
+            word: "Disease", 
+            options: ["المرض العضوي", "الصحة", "العافية", "الرفاهية"], 
+            correct: 0 
+        },
+        { 
+            word: "Continuum", 
+            options: ["نقطة", "خط", "مستمر", "دائرة"], 
+            correct: 2 
+        },
+        { 
+            word: "Acute", 
+            options: ["مزمن", "حاد", "خفيف", "شديد"], 
+            correct: 1 
+        },
+        { 
+            word: "Chronic", 
+            options: ["مزمن", "حاد", "خفيف", "شديد"], 
+            correct: 0 
+        },
+        { 
+            word: "Etiology", 
+            options: ["الأعراض", "التشخيص", "العلاج", "مسببات المرض"], 
+            correct: 3 
+        },
+        { 
+            word: "Holistic", 
+            options: ["جزئي", "شامل", "محدود", "بسيط"], 
+            correct: 1 
+        },
+        { 
+            word: "Well-being", 
+            options: ["المرض", "الصحة", "العافية", "الرفاهية"], 
+            correct: 3 
+        }
+    ];
+    
+    // Detailed explanation content
+    const detailedExplanationContent = [
+        {
+            title: "Introduction to Health and Illness",
+            titleArabic: "مقدمة في الصحة والمرض",
+            content: [
+                {
+                    type: "dual-text-row",
+                    english: "<span class=\"highlight highlight-2\">Health</span>, <span class=\"highlight highlight-3\">wellness</span>, and <span class=\"highlight highlight-1\">well-being</span> have many definitions and interpretations. The nurse should be familiar with the most common aspects of the concepts and consider how they may be individualized with specific clients.",
+                    arabic: "<span class=\"highlight highlight-2\">الصحة</span> و<span class=\"highlight highlight-3\">الرفاهية</span> و<span class=\"highlight highlight-1\">العافية</span> لها العديد من التعريفات والتأويلات. يجب على الممرضة أن تكون على دراية بالجوانب الأكثر شيوعاً لهذه المفاهيم وأن تنظر في كيفية تخصيصها للعملاء المحددين."
+                },
+                {
+                    type: "professor-explanation",
+                    title: "Professor's Explanation",
+                    content: "Health is a complex concept that has evolved over time. Historically, health was defined simply as the absence of disease. However, modern definitions recognize that health is much more than just not being sick. The World Health Organization's definition of health as 'a state of complete physical, mental and social well-being' represents a paradigm shift in how we understand health. This broader perspective acknowledges that health is multidimensional and subjective, varying from person to person.",
+                    contentArabic: "الصحة مفهوم معقد تطور مع مرور الوقت. تاريخياً، كانت الصحة تُعرّف ببساطة على أنها غياب المرض. ومع ذلك، فإن التعريفات الحديثة تعترف بأن الصحة أكثر بكثير من مجرد عدم المرض. تعريف منظمة الصحة العالمية للصحة بأنها 'حالة من الرفاهية الجسدية والعقلية والاجتماعية الكاملة' يمثل تحولاً جذرياً في كيفية فهمنا للصحة. هذه المنظور الأوسع يعترف بأن الصحة متعددة الأبعاد وذاتية، وتختلف من شخص لآخر."
+                },
+                {
+                    type: "practical-example",
+                    title: "Practical Example",
+                    content: "When conducting a health assessment, a nurse should not only focus on physical symptoms and laboratory values but also consider the patient's perception of their health. For example, a patient with a chronic condition like diabetes may report feeling 'healthy' despite their disease, because they have adapted their lifestyle and feel in control of their condition. Conversely, a person with no diagnosed medical condition may feel 'unwell' due to stress, fatigue, or other factors. This illustrates why nurses must consider both objective and subjective aspects of health.",
+                    contentArabic: "عند إجراء تقييم صحي، يجب على الممرضة أن تركز ليس فقط على الأعراض الجسدية وقيم المختبر ولكن أيضاً أن تنظر في إدراك المريض لصحته. على سبيل المثال، قد يبلغ مريض يعاني من حالة مزمنة مثل مرض السكري عن شعوره بـ 'الصحة' على الرغم من مرضه، لأنه تكيف مع نمط حياته ويشعر بالسيطرة على حالته. على العكس، قد يشعر شخص لا يعاني من حالة طبية تشخيصية بـ 'عدم الراحة' بسبب الإجهاد أو التعب أو عوامل أخرى. هذا يوضح لماذا يجب على الممرضين النظر في الجوانب الموضوعية والذاتية للصحة."
+                },
+                {
+                    type: "doctor-note",
+                    title: "Doctor's Note",
+                    content: "In clinical practice, understanding the distinction between disease and illness is crucial. Disease refers to the pathological process (the biological alteration), while illness refers to the subjective experience of feeling unwell. This distinction helps healthcare providers recognize that two patients with the same disease may have very different experiences of illness. Effective healthcare requires addressing both the biological disease and the personal experience of illness.",
+                    contentArabic: "في الممارسة السريرية، يعد فهم التمييز بين المرض العضوي والمرض أمراً بالغ الأهمية. يشير المرض العضوي إلى العملية المرضية (التغيير البيولوجي)، بينما يشير المرض إلى التجربة الذاتية للشعور بعدم الراحة. يساعد هذا التمييز مقدمي الرعاية الصحية على الاعتراف بأن مريضين بنفس المرض العضوي قد يكون لديهما تجارب مختلفة جداً للمرض. تتطلب الرعاية الصحية الفعالة معالجة كل من المرض العضوي البيولوجي والتجربة الشخصية للمرض."
+                }
+            ]
+        },
+        {
+            title: "Health-Illness Continuum",
+            titleArabic: "مستمر الصحة-المرض",
+            content: [
+                {
+                    type: "dual-text-row",
+                    english: "<span class=\"highlight highlight-1\">Wellness</span> further describes health status. It allows health to be placed on a continuum from one's optimal level ('wellness') to a maladaptive state ('illness'). <span class=\"highlight highlight-2\">Wellness</span> is a dynamic process that is ever changing.",
+                    arabic: "<span class=\"highlight highlight-1\">الرفاهية</span> تصف الحالة الصحية بشكل أكبر. تسمح بوضع الصحة على مستمر من المستوى الأمثل ('الرفاهية') إلى الحالة غير التكيفية ('المرض'). <span class=\"highlight highlight-2\">الرفاهية</span> هي عملية ديناميكية متغيرة باستمرار."
+                },
+                {
+                    type: "dual-text-row",
+                    english: "The well person usually has some degree of illness and the ill person usually has some degree of wellness. This concept of a health continuum negates the idea that wellness and illness are opposite because they may occur simultaneously in the same person in varying degrees.",
+                    arabic: "الشخص السليم عادة ما يكون لديه درجة من المرض، والشخص المريض عادة ما يكون لديه درجة من الرفاهية. هذا المفهوم لمستمر الصحة يبطل فكرة أن الرفاهية والمرض متضادان لأنهما قد يحدثان في نفس الوقت في نفس الشخص بدرجات متفاوتة."
+                },
+                {
+                    type: "professor-explanation",
+                    title: "Professor's Explanation",
+                    content: "The health-illness continuum is a visual representation that helps us understand that health is not an all-or-nothing concept. Instead, it exists on a spectrum with optimal wellness at one end and premature death at the other. Most people exist somewhere between these two extremes, moving back and forth along the continuum throughout their lives. This model recognizes that even people with chronic illnesses can experience high levels of wellness, while people without diagnosed diseases may experience low levels of wellness due to various factors.",
+                    contentArabic: "مستمر الصحة-المرض هو تمثيل بصري يساعدنا على فهم أن الصحة ليست مفهوماً كل شيء أو لا شيء. بدلاً من ذلك، توجد على طيف مع الرفاهية المثلى في أحد الطرفين والوفاة المبكرة في الطرف الآخر. معظم الناس موجودون في مكان ما بين هذين الطرفين، يتحركون ذهاباً وإياباً على طول المستمر طوال حياتهم. يعترف هذا النموذج بأن حتى الأشخاص الذين يعانون من أمراض مزمنة يمكن أن يعانوا من مستويات عالية من الرفاهية، بينما قد يعاني الأشخاص الذين لا يعانون من أمراض تشخيصية من مستويات منخفضة من الرفاهية بسبب عوامل مختلفة."
+                },
+                {
+                    type: "practical-example",
+                    title: "Practical Example",
+                    content: "Consider a patient with rheumatoid arthritis who has adapted to their condition through medication, physical therapy, and lifestyle modifications. Despite having a chronic disease, they may function at a high level of wellness on the health-illness continuum. Conversely, a person without any diagnosed medical condition but who experiences high stress, poor nutrition, and lack of exercise may be at a lower level of wellness. As nurses, we should assess where patients are on the continuum and help them move toward higher levels of wellness through appropriate interventions.",
+                    contentArabic: "فكر في مريض يعاني من التهاب المفاصل الروماتويدي الذي تكيف مع حالته من خلال الأدوية والعلاج الطبيعي وتعديلات نمط الحياة. على الرغم من وجود مرض مزمن، قد يعملون بمستوى عالٍ من الرفاهية على مستمر الصحة-المرض. على العكس، قد يكون شخص لا يعاني من أي حالة طبية تشخيصية ولكنه يعاني من إجهاد عالي وتغذية سيئة ونقص التمرين في مستوى أقل من الرفاهية. كممرضين، يجب أن نقيم أين يقع المرضى على المستمر ونساعدهم على التحرك نحو مستويات أعلى من الرفاهية من خلال التدخلات المناسبة."
+                }
+            ]
+        },
+        {
+            title: "Dimensions of Wellness",
+            titleArabic: "أبعاد الرفاهية",
+            content: [
+                {
+                    type: "dual-text-row",
+                    english: "Wellness is multidimensional and encompasses seven key dimensions: <span class=\"highlight highlight-1\">Physical</span>, <span class=\"highlight highlight-2\">Social</span>, <span class=\"highlight highlight-3\">Emotional</span>, <span class=\"highlight highlight-4\">Intellectual</span>, <span class=\"highlight highlight-5\">Spiritual</span>, <span class=\"highlight highlight-1\">Occupational</span>, and <span class=\"highlight highlight-2\">Environmental</span>.",
+                    arabic: "الرفاهية متعددة الأبعاد وتشمل سبعة أبعاد رئيسية: <span class=\"highlight highlight-1\">الجسدية</span>، و<span class=\"highlight highlight-2\">الاجتماعية</span>، و<span class=\"highlight highlight-3\">العاطفية</span>، و<span class=\"highlight highlight-4\">الفكرية</span>، و<span class=\"highlight highlight-5\">الروحية</span>، و<span class=\"highlight highlight-1\">المهنية</span>، و<span class=\"highlight highlight-2\">البيئية</span>."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Physical Wellness",
+                    content: "The ability to carry out daily tasks, achieve fitness, maintain adequate nutrition and proper body fat, avoid abusing drugs and alcohol or using tobacco products, and generally to practice positive lifestyle habits.",
+                    contentArabic: "القدرة على أداء المهام اليومية، وتحقيق اللياقة البدنية، والحفاظ على التغذية الكافية والدهون الجسمية المناسبة، وتجنب إساءة استخدام المخدرات والكحول أو استخدام منتجات التبغ، وممارسة عادات نمط الحياة الإيجابية بشكل عام."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Social Wellness",
+                    content: "The ability to interact successfully with people and within the environment.",
+                    contentArabic: "القدرة على التفاعل بنجاح مع الناس وفي البيئة المحيطة."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Emotional Wellness",
+                    content: "The ability to manage stress and to express emotions appropriately. Emotional wellness involves the ability to recognize, accept, and express feelings.",
+                    contentArabic: "القدرة على إدارة التوتر والتعبير عن المشاعر بشكل مناسب. تتضمن الرفاهية العاطفية القدرة على التعرف على المشاعر وقبولها والتعبير عنها."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Intellectual Wellness",
+                    content: "The ability to learn and use information effectively for personal, family, and career development.",
+                    contentArabic: "القدرة على التعلم واستخدام المعلومات بفعالية للتطور الشخصي والعائلي والمهني."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Spiritual Wellness",
+                    content: "The belief in some force (nature, science, religion, or a higher power) that serves to unite human beings and provide meaning and purpose of life.",
+                    contentArabic: "الإيمان بقوة معينة (الطبيعة، العلم، الدين، أو قوة عليا) تعمل على توحيد البشر وتوفير المعنى والغاية من الحياة."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Occupational Wellness",
+                    content: "The ability to achieve a balance between work and leisure time. A person's beliefs about education, employment, and home influence personal satisfaction and relationships with others.",
+                    contentArabic: "القدرة على تحقيق التوازن بين العمل ووقت الفراغ. تؤثر معتقدات الشخص حول التعليم والعمل والمنزل على الرضا الشخصي والعلاقات مع الآخرين."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Environmental Wellness",
+                    content: "The ability to promote health measures that improve the standard of living and quality of life in the community.",
+                    contentArabic: "القدرة على تعزيز التدابير الصحية التي تحسن مستوى المعيشة وجودة الحياة في المجتمع."
+                },
+                {
+                    type: "professor-explanation",
+                    title: "Professor's Explanation",
+                    content: "These seven dimensions of wellness are interconnected and influence each other. For example, poor physical wellness (such as chronic pain) can affect emotional wellness (leading to depression), social wellness (reducing ability to interact with others), and occupational wellness (limiting ability to work). Similarly, strong spiritual wellness can provide the resilience to cope with physical challenges. As nurses, we should assess all dimensions of wellness when planning care, not just focus on the physical aspect.",
+                    contentArabic: "هذه الأبعاد السبعة للرفاهية مترابطة وتؤثر على بعضها البعض. على سبيل المثال، الرفاهية الجسدية السيئة (مثل الألم المزمن) يمكن أن تؤثر على الرفاهية العاطفية (مما يؤدي إلى الاكتئاب)، والرفاهية الاجتماعية (تقليل القدرة على التفاعل مع الآخرين)، والرفاهية المهنية (تقييد القدرة على العمل). وبالمثل، يمكن للرفاهية الروحية القوية أن توفر المرونة للتعامل مع التحديات الجسدية. كممرضين، يجب أن نقيم جميع أبعاد الرفاهية عند تخطيط الرعاية، وليس فقط التركيز على الجانب الجسدي."
+                }
+            ]
+        },
+        {
+            title: "Factors Affecting Health Status",
+            titleArabic: "العوامل المؤثرة على الحالة الصحية",
+            content: [
+                {
+                    type: "dual-text-row",
+                    english: "Multiple factors affect health status, which can be categorized as <span class=\"highlight highlight-1\">internal factors</span> and <span class=\"highlight highlight-2\">external factors</span>.",
+                    arabic: "تؤثر عوامل متعددة على الحالة الصحية، والتي يمكن تصنيفها كـ <span class=\"highlight highlight-1\">عوامل داخلية</span> و<span class=\"highlight highlight-2\">عوامل خارجية</span>."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Internal Factors",
+                    content: "Internal factors include genetic makeup, sex, age (Biologic dimension), emotional factors including mind-body interactions and self-concept (Psychological dimension), and lifestyle choices and spiritual and religious beliefs (Cognitive dimension).",
+                    contentArabic: "تشمل العوامل الداخلية التكوين الجيني، والجنس، والعمر (البعد البيولوجي)، والعوامل العاطفية بما في ذلك تفاعلات العقل والجسم ومفهوم الذات (البعد النفسي)، واختيارات نمط الحياة والمعتقدات الروحية والدينية (البعد المعرفي)."
+                },
+                {
+                    type: "sub-concept",
+                    title: "External Factors",
+                    content: "External factors include environment, standards of living (reflecting occupation, income, and education), family and cultural beliefs, and social support networks.",
+                    contentArabic: "تشمل العوامل الخارجية البيئة، ومستويات المعيشة (تعكس المهنة والدخل والتعليم)، ومعتقدات الأسرة والثقافة، وشبكات الدعم الاجتماعي."
+                },
+                {
+                    type: "professor-explanation",
+                    title: "Professor's Explanation",
+                    content: "Understanding the factors that affect health status is essential for nurses to provide holistic care. Internal factors are those inherent to the individual, while external factors are those from the environment. For example, a person may have a genetic predisposition to a certain disease (internal factor), but whether they develop the disease may be influenced by environmental factors like diet, exposure to toxins, or stress levels. Nurses should assess both internal and external factors when planning interventions to improve health.",
+                    contentArabic: "فهم العوامل التي تؤثر على الحالة الصحية أمر ضروري للممرضين لتقديم رعاية شاملة. العوامل الداخلية هي تلك المتأصلة في الفرد، بينما العوامل الخارجية هي تلك من البيئة. على سبيل المثال، قد يكون لدى شخص استعداد وراثي لمرض معين (عامل داخلي)، ولكن ما إذا كان سيصاب بالمرض قد يتأثر بالعوامل البيئية مثل النظام الغذائي، أو التعرض للسموم، أو مستويات الإجهاد. يجب على الممرضين تقييم العوامل الداخلية والخارجية عند تخطيط التدخلات لتحسين الصحة."
+                },
+                {
+                    type: "practical-example",
+                    title: "Practical Example",
+                    content: "When working with a patient with hypertension, a nurse should consider both internal and external factors. Internal factors might include the patient's age, genetic predisposition, and stress coping mechanisms. External factors might include their diet high in sodium, lack of access to safe places for exercise, and cultural beliefs about medication. An effective care plan would address all these factors, not just prescribe medication.",
+                    contentArabic: "عند العمل مع مريض يعاني من ارتفاع ضغط الدم، يجب على الممرضة النظر في العوامل الداخلية والخارجية. قد تشمل العوامل الداخلية عمر المريض، والاستعداد الوراثي، وآليات التكيف مع الإجهاد. قد تشمل العوامل الخارجية نظامهم الغذائي الغني بالصوديوم، ونقص الوصول إلى أماكن آمنة لممارسة الرياضة، ومعتقدات ثقافية حول الأدوية. ستخاطب خطة الرعاية الفعالة جميع هذه العوامل، وليس فقط وصف الأدوية."
+                }
+            ]
+        },
+        {
+            title: "Illness and Disease",
+            titleArabic: "المرض والمرض العضوي",
+            content: [
+                {
+                    type: "dual-text-row",
+                    english: "<span class=\"highlight highlight-1\">Illness</span> and <span class=\"highlight highlight-2\">disease</span> are related but distinct concepts. <span class=\"highlight highlight-1\">Illness</span> is a highly personal state in which the person's physical, emotional, intellectual, social, developmental, or spiritual functioning is thought to be diminished. <span class=\"highlight highlight-2\">Disease</span> can be described as an alteration in body functions resulting in a reduction of capacities or shortening of the normal life span.",
+                    arabic: "<span class=\"highlight highlight-1\">المرض</span> و<span class=\"highlight highlight-2\">المرض العضوي</span> مفاهيم مرتبطة ولكن متميزة. <span class=\"highlight highlight-1\">المرض</span> هو حالة شخصية للغاية يُعتقد فيها أن وظائف الشخص الجسدية أو العاطفية أو الفكرية أو الاجتماعية أو النمائية أو الروحية قد تضاءلت. يمكن وصف <span class=\"highlight highlight-2\">المرض العضوي</span> بأنه تغيير في وظائف الجسم ينتج عنه انخفاض في القدرات أو تقصير في مدة الحياة الطبيعية."
+                },
+                {
+                    type: "dual-text-row",
+                    english: "Illness is usually associated with disease but may occur independently of it. The causation of a disease is called its etiology.",
+                    arabic: "يرتبط المرض عادة بالمرض العضوي ولكنه قد يحدث بشكل مستقل عنه. يُطلق على سبب المرض العضوي اسم مسبباته."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Acute Illness",
+                    content: "Typically characterized by severe symptoms of relatively short duration.",
+                    contentArabic: "يتميز عادة بأعراض شديدة لمدة قصيرة نسبياً."
+                },
+                {
+                    type: "sub-concept",
+                    title: "Chronic Illness",
+                    content: "One that lasts for an extended period, usually 6 months or longer, and often for person's life.",
+                    contentArabic: "مرض يستمر لفترة طويلة، عادة 6 أشهر أو أكثر، وغالباً مدى حياة الشخص."
+                },
+                {
+                    type: "professor-explanation",
+                    title: "Professor's Explanation",
+                    content: "The distinction between illness and disease is fundamental to nursing practice. Disease refers to the pathological process (the objective, biological alteration), while illness refers to the subjective experience of feeling unwell. For example, two patients with the same disease (e.g., diabetes) may have very different experiences of illness based on their symptoms, coping mechanisms, support systems, and personal meanings they attach to the condition. Nurses must address both the disease (through medical treatments) and the illness (through emotional support, education, and helping patients adapt).",
+                    contentArabic: "التمييز بين المرض والمرض العضوي أساسي لممارسة التمريض. يشير المرض العضوي إلى العملية المرضية (التغيير الموضوعي، البيولوجي)، بينما يشير المرض إلى التجربة الذاتية للشعور بعدم الراحة. على سبيل المثال، قد يكون لدى مريضين بنفس المرض العضوي (مثل مرض السكري) تجارب مختلفة جداً للمرض بناءً على أعراضهم، وآليات التكيف، وأنظمة الدعم، والمعاني الشخصية التي يربطونها بالحالة. يجب على الممرضين معالجة كل من المرض العضوي (من خلال العلاجات الطبية) والمرض (من خلال الدعم العاطفي، والتعليم، ومساعدة المرضى على التكيف)."
+                },
+                {
+                    type: "practical-example",
+                    title: "Practical Example",
+                    content: "A patient newly diagnosed with multiple sclerosis (disease) may experience illness through various symptoms like fatigue, difficulty walking, and vision problems. They may also experience emotional responses like fear, anger, or grief. The nurse's role includes administering medications to treat the disease, providing education about the condition, helping the patient develop coping strategies, and connecting them with support groups to address the illness experience.",
+                    contentArabic: "مريض تم تشخيصه حديثاً بالتصلب المتعدد (مرض عضوي) قد يعاني من المرض من خلال أعراض مختلفة مثل التعب، وصعوبة المشي، ومشاكل في الرؤية. قد يعاني أيضاً من استجابات عاطفية مثل الخوف، أو الغضب، أو الحزن. تشمل دور الممرضة إدارة الأدوية لعلاج المرض العضوي، وتقديم التعليم حول الحالة، ومساعدة المريض على تطوير استراتيجيات التكيف، وربطهم بمجموعات الدعم لمعالجة تجربة المرض."
+                }
+            ]
+        }
+    ];
+    
+    // Comparison content
+    const comparisonContent = [
+        {
+            title: "Health vs. Wellness",
+            titleArabic: "الصحة مقابل الرفاهية",
+            rows: [
+                {
+                    aspect: "Definition",
+                    aspectArabic: "التعريف",
+                    item1: "A state of complete physical, mental, and social well-being",
+                    item1Arabic: "حالة من الرفاهية الجسدية والعقلية والاجتماعية الكاملة",
+                    item2: "A dynamic process that is ever changing",
+                    item2Arabic: "عملية ديناميكية متغيرة باستمرار"
+                },
+                {
+                    aspect: "Nature",
+                    aspectArabic: "الطبيعة",
+                    item1: "A state or condition",
+                    item1Arabic: "حالة أو شرط",
+                    item2: "A process",
+                    item2Arabic: "عملية"
+                },
+                {
+                    aspect: "Relationship to Disease",
+                    aspectArabic: "العلاقة بالمرض",
+                    item1: "Often defined in terms of absence of disease",
+                    item1Arabic: "غالباً ما تُعرّف من حيث غياب المرض",
+                    item2: "Can coexist with disease in varying degrees",
+                    item2Arabic: "يمكن أن تتعايش مع المرض بدرجات متفاوتة"
+                },
+                {
+                    aspect: "Example",
+                    aspectArabic: "مثال",
+                    item1: "WHO definition: 'a state of complete physical, mental and social well-being'",
+                    item1Arabic: "تعريف منظمة الصحة العالمية: 'حالة من الرفاهية الجسدية والعقلية والاجتماعية الكاملة'",
+                    item2: "A person with chronic disease who has adapted well and functions optimally",
+                    item2Arabic: "شخص يعاني من مرض مزمن تكيف بشكل جيد ويعمل بشكل أمثل"
+                }
+            ]
+        },
+        {
+            title: "Illness vs. Disease",
+            titleArabic: "المرض مقابل المرض العضوي",
+            rows: [
+                {
+                    aspect: "Definition",
+                    aspectArabic: "التعريف",
+                    item1: "A highly personal state in which functioning is thought to be diminished",
+                    item1Arabic: "حالة شخصية للغاية يُعتقد فيها أن الوظائف قد تضاءلت",
+                    item2: "An alteration in body functions resulting in reduction of capacities",
+                    item2Arabic: "تغيير في وظائف الجسم ينتج عنه انخفاض في القدرات"
+                },
+                {
+                    aspect: "Nature",
+                    aspectArabic: "الطبيعة",
+                    item1: "Subjective experience",
+                    item1Arabic: "تجربة ذاتية",
+                    item2: "Objective biological alteration",
+                    item2Arabic: "تغيير بيولوجي موضوعي"
+                },
+                {
+                    aspect: "Relationship",
+                    aspectArabic: "العلاقة",
+                    item1: "Usually associated with disease but may occur independently",
+                    item1Arabic: "يرتبط عادة بالمرض العضوي ولكنه قد يحدث بشكل مستقل",
+                    item2: "Often leads to illness but not always",
+                    item2Arabic: "غالباً ما يؤدي إلى المرض ولكن ليس دائماً"
+                },
+                {
+                    aspect: "Example",
+                    aspectArabic: "مثال",
+                    item1: "Feeling unwell, fatigued, or in pain",
+                    item1Arabic: "الشعور بعدم الراحة، أو التعب، أو الألم",
+                    item2: "Diabetes, hypertension, cancer",
+                    item2Arabic: "مرض السكري، ارتفاع ضغط الدم، السرطان"
+                }
+            ]
+        },
+        {
+            title: "Acute vs. Chronic Illness",
+            titleArabic: "المرض الحاد مقابل المرض المزمن",
+            rows: [
+                {
+                    aspect: "Duration",
+                    aspectArabic: "المدة",
+                    item1: "Relatively short duration",
+                    item1Arabic: "مدة قصيرة نسبياً",
+                    item2: "Extended period, usually 6 months or longer",
+                    item2Arabic: "فترة طويلة، عادة 6 أشهر أو أكثر"
+                },
+                {
+                    aspect: "Onset",
+                    aspectArabic: "البداية",
+                    item1: "Usually sudden or rapid",
+                    item1Arabic: "عادة مفاجئة أو سريعة",
+                    item2: "Often gradual or progressive",
+                    item2Arabic: "غالباً تدريجية أو تطورية"
+                },
+                {
+                    aspect: "Symptoms",
+                    aspectArabic: "الأعراض",
+                    item1: "Typically severe",
+                    item1Arabic: "عادة شديدة",
+                    item2: "May range from mild to severe",
+                    item2Arabic: "قد تتراوح من خفيفة إلى شديدة"
+                },
+                {
+                    aspect: "Treatment Goals",
+                    aspectArabic: "أهداف العلاج",
+                    item1: "Cure or control of immediate problem",
+                    item1Arabic: "علاج أو السيطرة على المشكلة الفورية",
+                    item2: "Management, control of symptoms, prevention of complications",
+                    item2Arabic: "الإدارة، والسيطرة على الأعراض، ومنع المضاعفات"
+                },
+                {
+                    aspect: "Example",
+                    aspectArabic: "مثال",
+                    item1: "Appendicitis, pneumonia, bone fracture",
+                    item1Arabic: "التهاب الزائدة الدودية، والالتهاب الرئوي، وكسر العظام",
+                    item2: "Diabetes, arthritis, heart disease",
+                    item2Arabic: "مرض السكري، والتهاب المفاصل، وأمراض القلب"
+                }
+            ]
+        }
+    ];
+    
+    // Important numbers content
+    const numbersContent = [
+        {
+            number: "7",
+            title: "Dimensions of Wellness",
+            titleArabic: "أبعاد الرفاهية",
+            description: "There are seven key dimensions of wellness: Physical, Social, Emotional, Intellectual, Spiritual, Occupational, and Environmental.",
+            descriptionArabic: "هناك سبعة أبعاد رئيسية للرفاهية: الجسدية، والاجتماعية، والعاطفية، والفكرية، والروحية، والمهنية، والبيئية.",
+            explanation: {
+                type: "dual-text-row",
+                english: "These seven dimensions are interconnected and influence each other. A person with optimal wellness has balance across all seven dimensions. When one dimension is neglected, it can negatively impact the others. For example, poor physical wellness can lead to emotional distress, while strong spiritual wellness can provide resilience during physical challenges.",
+                arabic: "هذه الأبعاد السبعة مترابطة وتؤثر على بعضها البعض. الشخص الذي يتمتع بالرفاهية المثلى لديه توازن عبر جميع الأبعاد السبعة. عندما يتم إهمال أحد الأبعاد، يمكن أن يؤثر سلباً على الآخرين. على سبيل المثال، الرفاهية الجسدية السيئة يمكن أن تؤدي إلى الضائقة العاطفية، بينما يمكن للرفاهية الروحية القوية أن توفر المرونة خلال التحديات الجسدية."
+            }
+        },
+        {
+            number: "2",
+            title: "Main Categories of Health Factors",
+            titleArabic: "الفئات الرئيسية لعوامل الصحة",
+            description: "Factors affecting health status can be categorized into two main groups: internal factors and external factors.",
+            descriptionArabic: "يمكن تصنيف العوامل المؤثرة على الحالة الصحية إلى مجموعتين رئيسيتين: العوامل الداخلية والعوامل الخارجية.",
+            explanation: {
+                type: "dual-text-row",
+                english: "Internal factors include genetic makeup, sex, age, emotional factors, and lifestyle choices. External factors include environment, standards of living, family and cultural beliefs, and social support networks. Both types of factors interact to influence a person's health status.",
+                arabic: "تشمل العوامل الداخلية التكوين الجيني، والجنس، والعمر، والعوامل العاطفية، واختيارات نمط الحياة. تشمل العوامل الخارجية البيئة، ومستويات المعيشة، ومعتقدات الأسرة والثقافة، وشبكات الدعم الاجتماعي. تتفاعل أنواع العوامل معاً للتأثير على الحالة الصحية للشخص."
+            }
+        },
+        {
+            number: "6+",
+            title: "Months for Chronic Illness Definition",
+            titleArabic: "أشهر لتعريف المرض المزمن",
+            description: "A chronic illness is one that lasts for an extended period, usually 6 months or longer, and often for the person's entire life.",
+            descriptionArabic: "المرض المزمن هو مرض يستمر لفترة طويلة، عادة 6 أشهر أو أكثر، وغالباً مدى حياة الشخص بأكملها.",
+            explanation: {
+                type: "dual-text-row",
+                english: "This timeframe distinguishes chronic illnesses from acute conditions. Chronic illnesses often require ongoing management, lifestyle adaptations, and long-term medication. Examples include diabetes, heart disease, arthritis, and many mental health conditions.",
+                arabic: "هذا الإطار الزمني يميز الأمراض المزمنة عن الحالات الحادة. تتطلب الأمراض المزمنة غالباً إدارة مستمرة، وتكيفات نمط الحياة، والأدوية طويلة الأمد. تشمل الأمثلة مرض السكري، وأمراض القلب، والتهاب المفاصل، والعديد من حالات الصحة النفسية."
+            }
+        },
+        {
+            number: "1948",
+            title: "Year of WHO Health Definition",
+            titleArabic: "عام تعريف منظمة الصحة العالمية للصحة",
+            description: "The World Health Organization defined health in 1948 as 'a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.'",
+            descriptionArabic: "عرّفت منظمة الصحة العالمية الصحة في عام 1948 بأنها 'حالة من الرفاهية الجسدية والعقلية والاجتماعية الكاملة، وليست مجرد غياب المرض أو العجز'.",
+            explanation: {
+                type: "dual-text-row",
+                english: "This definition was revolutionary because it expanded the concept of health beyond the mere absence of disease. It emphasized the positive aspects of health and recognized that health is multidimensional. This definition continues to influence healthcare approaches today.",
+                arabic: "كان هذا التعريف ثورياً لأنه وسع مفهوم الصحة Beyond مجرد غياب المرض. أكد الجوانب الإيجابية للصحة واعترف بأن الصحة متعددة الأبعاد. لا يزال هذا التعريف يؤثر على نهج الرعاية الصحية اليوم."
+            }
+        },
+        {
+            number: "2004",
+            title: "Year of ANA Health Definition",
+            titleArabic: "عام تعريف الجمعية الأمريكية للممرضين للصحة",
+            description: "The American Nurses Association (ANA) stated in 2004 that health was 'an experience that is often expressed in term of wellness and illness and may occur in the presence or absence of disease or injury.'",
+            descriptionArabic: "ذكرت الجمعية الأمريكية للممرضين (ANA) في عام 2004 أن الصحة هي 'تجربة يُعبر عنها غالباً بمصطلحات الرفاهية والمرض وقد تحدث في وجود أو غياب المرض أو الإصابة'.",
+            explanation: {
+                type: "dual-text-row",
+                english: "This nursing-specific definition emphasizes the subjective experience of health and recognizes that wellness and illness can coexist. It aligns with the holistic approach to nursing care, which considers the whole person rather than just their physical condition.",
+                arabic: "هذا التعريف الخاص بالتمريض يركز على التجربة الذاتية للصحة ويعترف بأن الرفاهية والمرض يمكن أن تتعايش. يتوافق مع نهج الرعاية التمريضية الشاملة، الذي يعتبر الشخص بأكمله وليس فقط حالته الجسدية."
+            }
+        }
+    ];
+    
+    // Final review content
+    const finalReviewContent = [
+        {
+            title: "Health Definitions",
+            titleArabic: "تعريفات الصحة",
+            english: "Health has multiple definitions, from the traditional view as absence of disease to the WHO's comprehensive definition as complete physical, mental, and social well-being. The ANA's definition emphasizes health as a subjective experience that may occur with or without disease.",
+            arabic: "للصحة تعريفات متعددة، من النظرة التقليدية كغياب المرض إلى تعريف منظمة الصحة العالمية الشامل كرفاهية جسدية وعقلية واجتماعية كاملة. يؤكد تعريف الجمعية الأمريكية للممرضين على الصحة كتجربة ذاتية قد تحدث مع أو بدون مرض.",
+            explanation: "Understanding these different definitions helps nurses recognize that health is multidimensional and subjective. The WHO definition expanded healthcare to include mental and social aspects, while the ANA definition acknowledges the personal experience of health.",
+            explanationArabic: "فهم هذه التعريفات المختلفة يساعد الممرضين على الاعتراف بأن الصحة متعددة الأبعاد وذاتية. وسع تعريف منظمة الصحة العالمية الرعاية الصحية لتشمل الجوانب العقلية والاجتماعية، بينما يعترف تعريف الجمعية الأمريكية للممرضين بالتجربة الشخصية للصحة."
+        },
+        {
+            title: "Health-Illness Continuum",
+            titleArabic: "مستمر الصحة-المرض",
+            english: "The health-illness continuum concept recognizes that wellness and illness are not opposites but can coexist in varying degrees. People move back and forth along this continuum throughout their lives.",
+            arabic: "مفهوم مستمر الصحة-المرض يعترف بأن الرفاهية والمرض ليسا متضادين ولكن يمكن أن يتعايشا بدرجات متفاوتة. يتحرك الناس ذهاباً وإياباً على طول هذا المستمر طوال حياتهم.",
+            explanation: "This concept helps nurses understand that a person with a chronic disease can still experience high levels of wellness, while someone without a diagnosed condition may have low wellness. It emphasizes the need to assess and enhance wellness regardless of disease status.",
+            explanationArabic: "يساعد هذا المفهوم الممرضين على فهم أن شخصاً يعاني من مرض مزمن لا يزال يمكن أن يعاني من مستويات عالية من الرفاهية، بينما قد يكون لدى شخص لا يعاني من حالة تشخيصية رفاهية منخفضة. يركز على الحاجة إلى تقييم وتعزيز الرفاهية بغض النظر عن حالة المرض."
+        },
+        {
+            title: "Dimensions of Wellness",
+            titleArabic: "أبعاد الرفاهية",
+            english: "Wellness encompasses seven dimensions: Physical, Social, Emotional, Intellectual, Spiritual, Occupational, and Environmental. These dimensions are interconnected and influence each other.",
+            arabic: "تشمل الرفاهية سبعة أبعاد: الجسدية، والاجتماعية، والعاطفية، والفكرية، والروحية، والمهنية، والبيئية. هذه الأبعاد مترابطة وتؤثر على بعضها البعض.",
+            explanation: "Nurses should assess all dimensions of wellness when planning care, not just focus on the physical aspect. Imbalance in one dimension can affect others, while strengthening one dimension can positively impact overall wellness.",
+            explanationArabic: "يجب على الممرضين تقييم جميع أبعاد الرفاهية عند تخطيط الرعاية، وليس فقط التركيز على الجانب الجسدي. يمكن أن يؤثر عدم التوازن في أحد الأبعاد على الآخرين، بينما يمكن أن يؤدي تقوية أحد الأبعاد إلى تأثير إيجابي على الرفاهية العامة."
+        },
+        {
+            title: "Factors Affecting Health",
+            titleArabic: "العوامل المؤثرة على الصحة",
+            english: "Health status is influenced by internal factors (genetic, age, emotional, lifestyle) and external factors (environment, socioeconomic, cultural, social support).",
+            arabic: "تتأثر الحالة الصحية بالعوامل الداخلية (الوراثية، والعمر، والعاطفية، ونمط الحياة) والعوامل الخارجية (البيئية، والاجتماعية الاقتصادية، والثقافية، والدعم الاجتماعي).",
+            explanation: "Effective nursing care requires assessment of both internal and external factors. Nurses should help patients identify modifiable factors and develop strategies to address them, while providing support for non-modifiable factors.",
+            explanationArabic: "تتطلب الرعاية التمريضية الفعالة تقييم العوامل الداخلية والخارجية. يجب على الممرضين مساعدة المرضى على تحديد العوامل القابلة للتعديل وتطوير استراتيجيات لمعالجتها، مع توفير الدعم للعوامل غير القابلة للتعديل."
+        },
+        {
+            title: "Illness vs. Disease",
+            titleArabic: "المرض مقابل المرض العضوي",
+            english: "Illness is the subjective experience of feeling unwell, while disease is the objective biological alteration. Illness may occur with or without disease, and disease may or may not result in illness.",
+            arabic: "المرض هو التجربة الذاتية للشعور بعدم الراحة، بينما المرض العضوي هو التغيير البيولوجي الموضوعي. قد يحدث المرض مع أو بدون مرض عضوي، وقد يؤدي المرض العضوي أو لا يؤدي إلى المرض.",
+            explanation: "Nurses must address both the disease (through medical treatments) and the illness experience (through emotional support, education, and adaptation strategies). Recognizing this distinction helps provide more holistic care.",
+            explanationArabic: "يجب على الممرضين معالجة كل من المرض العضوي (من خلال العلاجات الطبية) وتجربة المرض (من خلال الدعم العاطفي، والتعليم، واستراتيجيات التكيف). يساعد الاعتراف بهذا التمييز على تقديم رعاية أكثر شمولاً."
+        }
+    ];
+    
+    // Exam tricks content
+    const examTricksContent = [
+        {
+            title: "Understanding Key Definitions",
+            titleArabic: "فهم التعريفات الرئيسية",
+            analysis: {
+                english: "Many exam questions test your understanding of key definitions like health, wellness, illness, and disease. Pay special attention to the distinctions between these terms. For example, remember that health is defined by WHO as 'complete physical, mental and social well-being' while wellness is 'a dynamic process that is ever changing.'",
+                arabic: "تختبر العديد من أسئلة الامتحان فهمك للتعريفات الرئيسية مثل الصحة، والرفاهية، والمرض، والمرض العضوي. انتبه بشكل خاص إلى التمييز بين هذه المصطلحات. على سبيل المثال، تذكر أن الصحة تُعرّف بواسطة منظمة الصحة العالمية بأنها 'رفاهية جسدية وعقلية واجتماعية كاملة' بينما الرفاهية هي 'عملية ديناميكية متغيرة باستمرار'."
+            },
+            tip: "Create flashcards for key definitions and review them regularly. When studying definitions, focus on the key distinguishing features of each term.",
+            tipArabic: "أنشئ بطاقات تعليمية للتعريفات الرئيسية وراجعها بانتظام. عند دراسة التعريفات، ركز على الميزات المميزة الرئيسية لكل مصطلح."
+        },
+        {
+            title: "Health-Illness Continuum Concept",
+            titleArabic: "مفهوم مستمر الصحة-المرض",
+            analysis: {
+                english: "The health-illness continuum is a frequently tested concept. Remember that wellness and illness are not opposites but can coexist in varying degrees. The well person may have some degree of illness, and the ill person usually has some degree of wellness. This concept challenges the traditional view that health is merely the absence of disease.",
+                arabic: "مستمر الصحة-المرض هو مفهوم مختبر بشكل متكرر. تذكر أن الرفاهية والمرض ليسا متضادين ولكن يمكن أن يتعايشا بدرجات متفاوتة. قد يكون لدى الشخص السليم درجة من المرض، والشخص المريض عادة ما يكون لديه درجة من الرفاهية. هذا المفهوم يتحدى النظرة التقليدية بأن الصحة هي مجرد غياب المرض."
+            },
+            tip: "When answering questions about the health-illness continuum, look for options that recognize the coexistence of wellness and illness rather than treating them as mutually exclusive.",
+            tipArabic: "عند الإجابة على الأسئلة حول مستمر الصحة-المرض، ابحث عن الخيارات التي تعترف بوجود الرفاهية والمرض معاً بدلاً من معاملتهما كمتنافيين."
+        },
+        {
+            title: "Dimensions of Wellness",
+            titleArabic: "أبعاد الرفاهية",
+            analysis: {
+                english: "Questions about the seven dimensions of wellness are common. Remember all seven dimensions: Physical, Social, Emotional, Intellectual, Spiritual, Occupational, and Environmental. Be prepared to identify which dimension is described in a scenario or to select interventions that address specific dimensions.",
+                arabic: "الأسئلة حول الأبعاد السبعة للرفاهية شائعة. تذكر جميع الأبعاد السبعة: الجسدية، والاجتماعية، والعاطفية، والفكرية، والروحية، والمهنية، والبيئية. كن مستعداً لتحديد البعد الموصوف في سيناريو أو لاختيار التدخلات التي تعالج أبعاداً محددة.",
+            },
+            tip: "Create a mnemonic device to remember the seven dimensions. For example: 'PIE SOES' (Physical, Intellectual, Emotional, Social, Occupational, Environmental, Spiritual).",
+            tipArabic: "أنشئ جهاز مساعد للحفظ لتذكر الأبعاد السبعة. على سبيل المثال: 'PIE SOES' (Physical, Intellectual, Emotional, Social, Occupational, Environmental, Spiritual)."
+        },
+        {
+            title: "Factors Affecting Health",
+            titleArabic: "العوامل المؤثرة على الصحة",
+            analysis: {
+                english: "Distinguish between internal and external factors affecting health. Internal factors include genetic makeup, age, sex, emotional factors, and lifestyle choices. External factors include environment, standards of living, family and cultural beliefs, and social support networks. Questions may ask you to identify which category a specific factor belongs to or to select interventions that address modifiable factors.",
+                arabic: "ميز بين العوامل الداخلية والخارجية المؤثرة على الصحة. تشمل العوامل الداخلية التكوين الجيني، والعمر، والجنس، والعوامل العاطفية، واختيارات نمط الحياة. تشمل العوامل الخارجية البيئة، ومستويات المعيشة، ومعتقدات الأسرة والثقافة، وشبكات الدعم الاجتماعي. قد تطلب منك الأسئلة تحديد الفئة التي ينتمي إليها عامل معين أو اختيار التدخلات التي تعالج العوامل القابلة للتعديل."
+            },
+            tip: "When studying factors affecting health, categorize them as internal vs. external and modifiable vs. non-modifiable. This will help you answer questions that ask about nursing interventions for specific health factors.",
+            tipArabic: "عند دراسة العوامل المؤثرة على الصحة، صنفها كداخلية مقابل خارجية وقابلة للتعديل مقابل غير قابلة للتعديل. سيساعدك هذا في الإجابة على الأسئلة التي تطلب التدخلات التمريضية لعوامل صحية محددة."
+        },
+        {
+            title: "Distinguishing Illness from Disease",
+            titleArabic: "التمييز بين المرض والمرض العضوي",
+            analysis: {
+                english: "Understanding the difference between illness (subjective experience) and disease (objective biological alteration) is crucial for nursing exams. Remember that illness may occur with or without disease, and disease may or may not result in illness. Questions may present scenarios and ask you to identify whether they represent illness, disease, or both.",
+                arabic: "فهم الفرق بين المرض (التجربة الذاتية) والمرض العضوي (التغيير البيولوجي الموضوعي) أمر بالغ الأهمية لامتحانات التمريض. تذكر أن المرض قد يحدث مع أو بدون مرض عضوي، وقد يؤدي المرض العضوي أو لا يؤدي إلى المرض. قد تقدم الأسئلة سيناريوهات وتطلب منك تحديد ما إذا كانت تمثل مرضاً، أو مرضاً عضوياً، أو كليهما."
+            },
+            tip: "Look for keywords in questions: 'feels,' 'experiences,' 'perceives' usually indicate illness, while 'diagnosis,' 'pathology,' 'altered function' usually indicate disease.",
+            tipArabic: "ابحث عن كلمات رئيسية في الأسئلة: 'يشعر'، 'يختبر'، 'يدرك' عادة ما تشير إلى المرض، بينما 'تشخيص'، 'علم الأمراض'، 'وظيفة متغيرة' عادة ما تشير إلى المرض العضوي."
+        }
+    ];
+    
+    // Speech synthesis setup
+    function loadVoices() {
+        const voices = window.speechSynthesis.getVoices();
+        selectedUsVoice = voices.find(voice => voice.lang.startsWith('en-US')) || voices.find(voice => voice.lang.includes('US'));
+    }
+    loadVoices();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark);
+        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+    
+    // Check for saved theme preference
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    // Navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuToggle = document.getElementById('menu-toggle');
+    const navContainer = document.getElementById('nav-container');
+    
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('open');
+        navContainer.classList.toggle('open');
+        
+        // Show interactive message when menu is opened
+        if (navContainer.classList.contains('open')) {
+            showMessage();
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetPage = link.getAttribute('data-page');
+            
+            // Close the menu after clicking a link
+            menuToggle.classList.remove('open');
+            navContainer.classList.remove('open');
+            
+            // Stop all timers when navigating away
+            clearInterval(quizTimerInterval);
+            clearInterval(wordsTimerInterval);
+            quizTimerInterval = null;
+            wordsTimerInterval = null;
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            
+            // Show target page
+            document.getElementById(targetPage).classList.add('active-page');
+            
+            // Update nav active state
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Start timer for the specific page if it's the first visit
+            if (targetPage === 'page6' && !quizTimerInterval) {
+                startQuizTimer();
+            }
+            if (targetPage === 'page8' && !wordsTimerInterval) {
+                startWordsTimer();
+            }
+        });
+    });
+    
+    // Interactive message function
+    function showMessage() {
+        const message = document.getElementById('interactive-message');
+        message.style.display = 'block';
+        
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            message.style.display = 'none';
+        }, 3000);
+    }
+    
+    // Close message button
+    document.getElementById('message-close').addEventListener('click', () => {
+        document.getElementById('interactive-message').style.display = 'none';
+    });
+    
+    // Flashcard functionality
+    const flashcard = document.getElementById('flashcard');
+    const cardFrontText = document.getElementById('card-front-text');
+    const cardBack = document.getElementById('card-back');
+    const currentCardSpan = document.getElementById('current-card');
+    const totalCardsSpan = document.getElementById('total-cards');
+    
+    function updateFlashcard() {
+        const card = flashcardsData[currentCardIndex];
+        cardFrontText.textContent = card.front;
+        cardBack.innerHTML = `
+            <h2>${card.back.term}</h2>
+            <h3>(${card.back.translation})</h3>
+            <div class="dual-text-row">
+                <div class="english-side">${card.back.english}</div>
+                <div class="arrow-separator"></div>
+                <div class="arabic-side">${card.back.arabic}</div>
+            </div>
+        `;
+        currentCardSpan.textContent = currentCardIndex + 1;
+        totalCardsSpan.textContent = flashcardsData.length;
+        flashcard.classList.remove('flipped');
+    }
+    
+    function speakFlashcard() {
+        if (flashcardsData.length === 0) return;
+        const card = flashcardsData[currentCardIndex];
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(card.back.term);
+            if (selectedUsVoice) { 
+                utterance.voice = selectedUsVoice; 
+            }
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        } else {
+            alert("Sorry, your browser doesn't support text-to-speech.");
+        }
+    }
+    
+    document.getElementById('prev-card').addEventListener('click', () => { 
+        if (currentCardIndex > 0) { 
+            currentCardIndex--; 
+            updateFlashcard(); 
+        } 
+    });
+    
+    document.getElementById('next-card').addEventListener('click', () => { 
+        if (currentCardIndex < flashcardsData.length - 1) { 
+            currentCardIndex++; 
+            updateFlashcard(); 
+        } 
+    });
+    
+    document.getElementById('flip-card').addEventListener('click', () => { 
+        flashcard.classList.toggle('flipped'); 
+    });
+    
+    document.getElementById('speak-card').addEventListener('click', speakFlashcard);
+    
+    flashcard.addEventListener('click', (e) => { 
+        if (e.target.tagName !== 'BUTTON') { 
+            flashcard.classList.toggle('flipped'); 
+        } 
+    });
+    
+    // Generate detailed explanation content
+    function generateDetailedExplanation() {
+        const container = document.getElementById('detailed-explanation');
+        container.innerHTML = '';
+        
+        detailedExplanationContent.forEach((section, index) => {
+            const numberedItem = document.createElement('div');
+            numberedItem.className = 'numbered-item';
+            
+            let contentHTML = `<h2>${index + 1}. ${section.title} - ${section.titleArabic}</h2>`;
+            
+            section.content.forEach(item => {
+                if (item.type === 'dual-text-row') {
+                    contentHTML += `
+                        <div class="dual-text-row">
+                            <div class="english-side">${item.english}</div>
+                            <div class="arrow-separator"></div>
+                            <div class="arabic-side">${item.arabic}</div>
+                        </div>
+                    `;
+                } else if (item.type === 'professor-explanation') {
+                    contentHTML += `
+                        <div class="professor-explanation">
+                            <h4><i class="fas fa-user-graduate"></i> ${item.title}</h4>
+                            <p>${item.content}</p>
+                            <p>${item.contentArabic}</p>
+                        </div>
+                    `;
+                } else if (item.type === 'practical-example') {
+                    contentHTML += `
+                        <div class="practical-example">
+                            <h4><i class="fas fa-hospital"></i> ${item.title}</h4>
+                            <p>${item.content}</p>
+                            <p>${item.contentArabic}</p>
+                        </div>
+                    `;
+                } else if (item.type === 'doctor-note') {
+                    contentHTML += `
+                        <div class="doctor-note">
+                            <h4><i class="fas fa-user-md"></i> ${item.title}</h4>
+                            <p>${item.content}</p>
+                            <p>${item.contentArabic}</p>
+                        </div>
+                    `;
+                } else if (item.type === 'sub-concept') {
+                    contentHTML += `
+                        <div class="sub-concept">
+                            <h3>${item.title} - ${item.titleArabic}</h3>
+                            <p>${item.content}</p>
+                            <p>${item.contentArabic}</p>
+                        </div>
+                    `;
+                }
+            });
+            
+            numberedItem.innerHTML = contentHTML;
+            container.appendChild(numberedItem);
+        });
+    }
+    
+    // Generate comparison content
+    function generateComparisons() {
+        const container = document.getElementById('comparisons');
+        container.innerHTML = '';
+        
+        comparisonContent.forEach((comparison, index) => {
+            const numberedItem = document.createElement('div');
+            numberedItem.className = 'numbered-item';
+            
+            let contentHTML = `<h2>${index + 1}. ${comparison.title} - ${comparison.titleArabic}</h2>`;
+            
+            contentHTML += `
+                <div class="comparison-table-3col">
+                    <div class="comparison-header">
+                        <div>Aspect / البعد</div>
+                        <div>${comparison.title.split(' vs. ')[0]}</div>
+                        <div>${comparison.title.split(' vs. ')[1]}</div>
+                    </div>
+            `;
+            
+            comparison.rows.forEach(row => {
+                contentHTML += `
+                    <div class="comparison-row">
+                        <div class="col-aspect">${row.aspect}<br><em>${row.aspectArabic}</em></div>
+                        <div class="col-item1">${row.item1}<br><em>${row.item1Arabic}</em></div>
+                        <div class="col-item2">${row.item2}<br><em>${row.item2Arabic}</em></div>
+                    </div>
+                `;
+            });
+            
+            contentHTML += `</div>`;
+            
+            numberedItem.innerHTML = contentHTML;
+            container.appendChild(numberedItem);
+        });
+    }
+    
+    // Generate important numbers content
+    function generateImportantNumbers() {
+        const container = document.getElementById('important-numbers');
+        container.innerHTML = '';
+        
+        numbersContent.forEach((number, index) => {
+            const numberSlide = document.createElement('div');
+            numberSlide.className = 'number-slide';
+            
+            numberSlide.innerHTML = `
+                <div class="number-highlight">${number.number}</div>
+                <h3 class="number-title">${number.title} - ${number.titleArabic}</h3>
+                <p class="number-description">${number.description}</p>
+                <p class="number-description">${number.descriptionArabic}</p>
+                <div class="number-explanation">
+                    ${number.explanation.type === 'dual-text-row' ? `
+                        <div class="dual-text-row">
+                            <div class="english-side">${number.explanation.english}</div>
+                            <div class="arrow-separator"></div>
+                            <div class="arabic-side">${number.explanation.arabic}</div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            container.appendChild(numberSlide);
+        });
+    }
+    
+    // Generate final review content
+    function generateFinalReview() {
+        const container = document.getElementById('final-review');
+        container.innerHTML = '';
+        
+        finalReviewContent.forEach((review, index) => {
+            const reviewSlide = document.createElement('div');
+            reviewSlide.className = 'review-slide';
+            
+            reviewSlide.innerHTML = `
+                <h3 class="review-title">${index + 1}. ${review.title} - ${review.titleArabic}</h3>
+                <div class="review-content">
+                    <div class="review-english">${review.english}</div>
+                    <div class="review-arabic">${review.arabic}</div>
+                </div>
+                <div class="review-explanation">
+                    <h4><i class="fas fa-lightbulb"></i> Key Point / نقطة رئيسية</h4>
+                    <p>${review.explanation}</p>
+                    <p>${review.explanationArabic}</p>
+                </div>
+            `;
+            
+            container.appendChild(reviewSlide);
+        });
+    }
+    
+    // Generate quiz questions
+    function generateQuizQuestions() {
+        const container = document.getElementById('quiz-questions');
+        container.innerHTML = '';
+        
+        quizData.forEach((q, index) => {
+            const questionCard = document.createElement('div');
+            questionCard.className = 'question-card';
+            
+            // Add difficulty badge
+            let difficultyClass = '';
+            let difficultyText = '';
+            
+            if (q.difficulty === 'easy') {
+                difficultyClass = 'difficulty-easy';
+                difficultyText = 'EASY';
+            } else if (q.difficulty === 'medium') {
+                difficultyClass = 'difficulty-medium';
+                difficultyText = 'MEDIUM';
+            } else if (q.difficulty === 'hard') {
+                difficultyClass = 'difficulty-hard';
+                difficultyText = 'HARD';
+            }
+            
+            questionCard.innerHTML = `
+                <div class="question-difficulty ${difficultyClass}">${difficultyText}</div>
+                <div class="question-header">
+                    <div class="question-text">${q.question}</div>
+                    <div class="question-number">${index + 1}</div>
+                </div>
+                <div class="options">
+                    ${q.options.map((option, i) => `
+                        <div class="option" data-question="${index}" data-option="${i}">
+                            <div class="option-letter">${String.fromCharCode(65 + i)}</div>
+                            <div class="option-text">${option}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="explanation" id="quiz-explanation-${index}">
+                    <div class="dual-content">
+                        <div class="english-content">${q.explanation.english}</div>
+                        <div class="arabic-content">${q.explanation.arabic}</div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(questionCard);
+        });
+        
+        // Add event listeners to options
+        container.querySelectorAll('.option').forEach(opt => { 
+            opt.addEventListener('click', function() { 
+                selectQuizOption(parseInt(this.dataset.question), parseInt(this.dataset.option)); 
+            }); 
+        });
+    }
+    
+    function selectQuizOption(questionIndex, optionIndex) {
+        const options = document.querySelectorAll(`#quiz-questions .question-card:nth-child(${questionIndex + 1}) .option`);
+        options.forEach(opt => opt.classList.remove('selected'));
+        options[optionIndex].classList.add('selected');
+        quizAnswers[questionIndex] = optionIndex;
+        updateQuizStats();
+    }
+    
+    function updateQuizStats() {
+        const answeredCount = quizAnswers.filter(a => a !== undefined).length;
+        document.getElementById('answered-count').textContent = answeredCount;
+        document.getElementById('remaining-count').textContent = quizData.length - answeredCount;
+    }
+    
+    function startQuizTimer() {
+        updateTimerDisplay('quiz-timer', quizTimeLeft);
+        quizTimerInterval = setInterval(() => { 
+            quizTimeLeft--; 
+            updateTimerDisplay('quiz-timer', quizTimeLeft); 
+            if (quizTimeLeft <= 0) { 
+                clearInterval(quizTimerInterval); 
+                alert('Time is up! Submitting quiz.'); 
+                submitQuiz(); 
+            } 
+        }, 1000);
+    }
+    
+    function submitQuiz() {
+        clearInterval(quizTimerInterval);
+        let correct = 0;
+        
+        quizData.forEach((q, index) => {
+            const options = document.querySelectorAll(`#quiz-questions .question-card:nth-child(${index + 1}) .option`);
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (quizAnswers[index] === q.correct) { 
+                correct++; 
+                options[quizAnswers[index]].classList.add('correct'); 
+            } else { 
+                if (quizAnswers[index] !== undefined) { 
+                    options[quizAnswers[index]].classList.add('wrong'); 
+                } 
+                options[q.correct].classList.add('correct'); 
+            }
+            
+            document.getElementById(`quiz-explanation-${index}`).classList.add('show');
+        });
+        
+        showResults('quiz-results', correct, quizData.length - correct, quizData.length);
+    }
+    
+    // Generate words test questions
+    function generateWordsQuestions() {
+        const container = document.getElementById('words-questions');
+        container.innerHTML = '';
+        
+        wordsData.forEach((w, index) => {
+            const questionCard = document.createElement('div');
+            questionCard.className = 'words-question-card';
+            
+            questionCard.innerHTML = `
+                <div class="question-header">
+                    <div class="question-number">${index + 1}</div>
+                </div>
+                <div class="word-display">${w.word}</div>
+                <div class="options">
+                    ${w.options.map((option, i) => `
+                        <div class="words-option" data-words-question="${index}" data-option="${i}">
+                            <div class="words-option-letter">${String.fromCharCode(65 + i)}</div>
+                            <div class="option-text">${option}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            container.appendChild(questionCard);
+        });
+        
+        // Add event listeners to options
+        container.querySelectorAll('.words-option').forEach(opt => { 
+            opt.addEventListener('click', function() { 
+                selectWordsOption(parseInt(this.dataset.wordsQuestion), parseInt(this.dataset.option)); 
+            }); 
+        });
+    }
+    
+    function selectWordsOption(questionIndex, optionIndex) {
+        const options = document.querySelectorAll(`#words-questions .words-question-card:nth-child(${questionIndex + 1}) .words-option`);
+        options.forEach(opt => opt.classList.remove('selected'));
+        options[optionIndex].classList.add('selected');
+        wordsAnswers[questionIndex] = optionIndex;
+        updateWordsStats();
+    }
+    
+    function updateWordsStats() {
+        const answeredCount = wordsAnswers.filter(a => a !== undefined).length;
+        document.getElementById('words-answered-count').textContent = answeredCount;
+        document.getElementById('words-remaining-count').textContent = wordsData.length - answeredCount;
+    }
+    
+    function startWordsTimer() {
+        updateTimerDisplay('words-timer', wordsTimeLeft);
+        wordsTimerInterval = setInterval(() => { 
+            wordsTimeLeft--; 
+            updateTimerDisplay('words-timer', wordsTimeLeft); 
+            if (wordsTimeLeft <= 0) { 
+                clearInterval(wordsTimerInterval); 
+                alert('Time is up! Submitting test.'); 
+                submitWordsTest(); 
+            } 
+        }, 1000);
+    }
+    
+    function submitWordsTest() {
+        clearInterval(wordsTimerInterval);
+        let correct = 0;
+        
+        wordsData.forEach((w, index) => {
+            const options = document.querySelectorAll(`#words-questions .words-question-card:nth-child(${index + 1}) .words-option`);
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (wordsAnswers[index] === w.correct) { 
+                correct++; 
+                options[wordsAnswers[index]].classList.add('correct'); 
+            } else { 
+                if (wordsAnswers[index] !== undefined) { 
+                    options[wordsAnswers[index]].classList.add('wrong'); 
+                } 
+                options[w.correct].classList.add('correct'); 
+            }
+        });
+        
+        showResults('words-results', correct, wordsData.length - correct, wordsData.length);
+    }
+    
+    // Generate exam tricks content
+    function generateExamTricks() {
+        const container = document.getElementById('tricks-content');
+        container.innerHTML = '';
+        
+        examTricksContent.forEach((trick, index) => {
+            const trickCard = document.createElement('div');
+            trickCard.className = 'trick-card';
+            
+            trickCard.innerHTML = `
+                <div class="trick-header">
+                    <div class="trick-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="trick-title">${index + 1}. ${trick.title} - ${trick.titleArabic}</div>
+                </div>
+                <div class="trick-analysis">
+                    <div class="analysis-english">${trick.analysis.english}</div>
+                    <div class="analysis-arabic">${trick.analysis.arabic}</div>
+                </div>
+                <div class="practical-example">
+                    <h4><i class="fas fa-star"></i> Tip / نصيحة</h4>
+                    <p>${trick.tip}</p>
+                    <p>${trick.tipArabic}</p>
+                </div>
+            `;
+            
+            container.appendChild(trickCard);
+        });
+    }
+    
+    // Helper functions
+    function updateTimerDisplay(timerId, seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        document.getElementById(timerId).textContent = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    function showResults(elementId, correct, wrong, total) {
+        const score = Math.round((correct / total) * 100);
+        const reportDiv = document.getElementById(elementId);
+        reportDiv.innerHTML = `
+            <div class="score-circle">${score}%</div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">${correct}</div>
+                    <div class="stat-label">Correct / صحيح</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${wrong}</div>
+                    <div class="stat-label">Wrong / خطأ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${total}</div>
+                    <div class="stat-label">Total / الإجمالي</div>
+                </div>
+            </div>
+        `;
+        reportDiv.classList.add('show');
+        reportDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Initialize the app
+    function initializeApp() {
+        updateFlashcard();
+        generateDetailedExplanation();
+        generateComparisons();
+        generateImportantNumbers();
+        generateFinalReview();
+        generateQuizQuestions();
+        generateWordsQuestions();
+        generateExamTricks();
+        updateQuizStats();
+        updateWordsStats();
+    }
+    
+    // Submit button event listeners
+    document.getElementById('submit-quiz').addEventListener('click', submitQuiz);
+    document.getElementById('submit-words').addEventListener('click', submitWordsTest);
+    
+    // Initialize the app when DOM is loaded
+    initializeApp();
+});
+</script>
+</body>
+</html>
